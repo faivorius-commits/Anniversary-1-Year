@@ -1,49 +1,1281 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>For You, My Love ♡</title>
+<meta charset="UTF-8">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
 
-    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<title>For My Favorite Person ♡</title>
 
-    <link rel="stylesheet" href="style.css">
+<!-- GOOGLE FONT -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link
+href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Poppins:wght@300;400;500;600;700&display=swap"
+rel="stylesheet"
+>
+
+<style>
+
+/* =========================================================
+   RESET
+========================================================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:"Poppins",sans-serif;
+    background:#fff8fc;
+    color:#4b4652;
+    overflow:hidden;
+}
+
+button{
+    font-family:inherit;
+}
+
+.hidden{
+    display:none!important;
+}
+
+
+/* =========================================================
+   COLOR
+========================================================= */
+
+:root{
+    --pink:#f6b8d0;
+    --pink-dark:#dc86ad;
+    --pink-light:#fff0f6;
+
+    --blue:#a9d8ef;
+    --blue-dark:#75b9dc;
+    --blue-light:#edf9ff;
+
+    --purple:#c8b8ec;
+
+    --white:#ffffff;
+    --text:#4b4652;
+}
+
+
+/* =========================================================
+   BACKGROUND
+========================================================= */
+
+body::before{
+    content:"";
+    position:fixed;
+    width:500px;
+    height:500px;
+
+    background:var(--pink);
+
+    filter:blur(150px);
+    opacity:.35;
+
+    top:-200px;
+    left:-150px;
+
+    z-index:-2;
+}
+
+body::after{
+    content:"";
+    position:fixed;
+
+    width:500px;
+    height:500px;
+
+    background:var(--blue);
+
+    filter:blur(150px);
+    opacity:.35;
+
+    right:-150px;
+    bottom:-200px;
+
+    z-index:-2;
+}
+
+
+/* =========================================================
+   START SCREEN
+========================================================= */
+
+#startScreen{
+    position:fixed;
+    inset:0;
+
+    background:
+        linear-gradient(
+            135deg,
+            #fff0f7,
+            #edf9ff
+        );
+
+    z-index:9999;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    text-align:center;
+
+    transition:
+        opacity 1s ease,
+        visibility 1s ease;
+}
+
+#startScreen.hide{
+    opacity:0;
+    visibility:hidden;
+}
+
+.start-content{
+    position:relative;
+    z-index:2;
+}
+
+.start-small{
+    font-size:11px;
+    letter-spacing:4px;
+    color:#8d8792;
+    margin-bottom:45px;
+}
+
+
+/* =========================================================
+   GIFT
+========================================================= */
+
+.gift{
+    width:180px;
+    height:150px;
+
+    margin:auto;
+
+    position:relative;
+
+    cursor:pointer;
+
+    animation:
+        floatingGift
+        2.5s
+        ease-in-out
+        infinite;
+}
+
+.gift-box{
+    position:absolute;
+
+    width:150px;
+    height:100px;
+
+    left:15px;
+    bottom:0;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f5abc9,
+            #e99abc
+        );
+
+    border-radius:8px;
+
+    box-shadow:
+        0 25px 45px rgba(217,137,174,.25);
+}
+
+.gift-box::before{
+    content:"";
+
+    position:absolute;
+
+    left:50%;
+    transform:translateX(-50%);
+
+    width:23px;
+    height:100%;
+
+    background:#dff3ff;
+}
+
+.gift-lid{
+    position:absolute;
+
+    width:175px;
+    height:38px;
+
+    left:2px;
+    top:35px;
+
+    background:#f4a5c5;
+
+    border-radius:8px;
+
+    z-index:3;
+
+    transition:
+        transform 1s
+        cubic-bezier(.68,-.55,.27,1.55);
+}
+
+.gift-lid::after{
+    content:"";
+
+    position:absolute;
+
+    left:50%;
+    transform:translateX(-50%);
+
+    width:23px;
+    height:100%;
+
+    background:#dff3ff;
+}
+
+.gift.open .gift-lid{
+    transform:
+        translateY(-75px)
+        rotate(-12deg);
+}
+
+.ribbon{
+    position:absolute;
+
+    left:50%;
+    transform:translateX(-50%);
+
+    width:28px;
+    height:100%;
+
+    background:#dff3ff;
+
+    z-index:5;
+}
+
+.bow{
+    position:absolute;
+
+    left:50%;
+    top:13px;
+
+    transform:translateX(-50%);
+
+    width:70px;
+    height:35px;
+
+    z-index:10;
+}
+
+.bow::before,
+.bow::after{
+    content:"";
+
+    position:absolute;
+
+    width:38px;
+    height:25px;
+
+    border:8px solid #dff3ff;
+
+    border-radius:50%;
+}
+
+.bow::before{
+    left:0;
+    transform:rotate(25deg);
+}
+
+.bow::after{
+    right:0;
+    transform:rotate(-25deg);
+}
+
+.start-hint{
+    margin-top:50px;
+
+    font-size:11px;
+    letter-spacing:3px;
+
+    color:#8f8993;
+
+    animation:
+        pulse
+        2s
+        infinite;
+}
+
+
+/* =========================================================
+   MAIN
+========================================================= */
+
+#app{
+    width:100%;
+    min-height:100vh;
+
+    opacity:0;
+    visibility:hidden;
+
+    transition:opacity 1.2s ease;
+}
+
+#app.show{
+    opacity:1;
+    visibility:visible;
+}
+
+.page{
+    min-height:100vh;
+
+    padding:
+        70px
+        8%;
+
+    display:none;
+
+    justify-content:center;
+    align-items:center;
+
+    position:relative;
+}
+
+.page.active{
+    display:flex;
+}
+
+
+/* =========================================================
+   PAGE CONTENT
+========================================================= */
+
+.content{
+    width:100%;
+    max-width:1000px;
+
+    text-align:center;
+}
+
+.eyebrow{
+    font-size:10px;
+
+    letter-spacing:4px;
+
+    color:#a49ca7;
+
+    margin-bottom:25px;
+}
+
+.title{
+    font-family:
+        "DM Serif Display",
+        serif;
+
+    font-size:
+        clamp(55px,9vw,100px);
+
+    line-height:.9;
+
+    color:#514955;
+}
+
+.title i{
+    color:var(--pink-dark);
+}
+
+.subtitle{
+    max-width:520px;
+
+    margin:30px auto;
+
+    font-size:14px;
+
+    line-height:2;
+
+    color:#85808a;
+}
+
+
+/* =========================================================
+   BUTTON
+========================================================= */
+
+.btn{
+    border:none;
+
+    padding:16px 32px;
+
+    border-radius:50px;
+
+    cursor:pointer;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--pink),
+            var(--blue)
+        );
+
+    color:white;
+
+    font-size:12px;
+
+    letter-spacing:1px;
+
+    box-shadow:
+        0 12px 30px
+        rgba(220,134,173,.2);
+
+    transition:.3s;
+}
+
+.btn:hover{
+    transform:
+        translateY(-4px)
+        scale(1.03);
+
+    box-shadow:
+        0 18px 35px
+        rgba(150,190,220,.3);
+}
+
+
+/* =========================================================
+   LOVE COUNTER
+========================================================= */
+
+.counter{
+    margin:50px auto;
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    max-width:650px;
+
+    gap:15px;
+}
+
+.counter-box{
+    padding:25px 10px;
+
+    background:
+        rgba(255,255,255,.7);
+
+    border:
+        1px solid
+        rgba(255,255,255,.9);
+
+    border-radius:20px;
+
+    backdrop-filter:blur(10px);
+
+    box-shadow:
+        0 15px 40px
+        rgba(120,100,130,.08);
+}
+
+.counter-number{
+    font-family:
+        "DM Serif Display",
+        serif;
+
+    font-size:45px;
+
+    color:var(--pink-dark);
+}
+
+.counter-label{
+    font-size:9px;
+
+    letter-spacing:2px;
+
+    color:#aaa2aa;
+}
+
+
+/* =========================================================
+   MEMORY CARDS
+========================================================= */
+
+.memory-container{
+    max-width:700px;
+
+    margin:40px auto;
+
+    position:relative;
+
+    min-height:470px;
+}
+
+.memory-card{
+    position:absolute;
+
+    inset:0;
+
+    background:white;
+
+    padding:15px;
+
+    border-radius:25px;
+
+    box-shadow:
+        0 25px 70px
+        rgba(100,90,110,.12);
+
+    transform:
+        scale(.85)
+        rotate(4deg);
+
+    opacity:0;
+
+    transition:
+        .7s cubic-bezier(.68,-.55,.27,1.55);
+
+    pointer-events:none;
+}
+
+.memory-card.active{
+    opacity:1;
+
+    transform:
+        scale(1)
+        rotate(0);
+
+    pointer-events:auto;
+}
+
+.memory-card img{
+    width:100%;
+    height:340px;
+
+    object-fit:cover;
+
+    border-radius:17px;
+}
+
+.memory-caption{
+    padding:18px;
+}
+
+.memory-caption h3{
+    font-family:
+        "DM Serif Display",
+        serif;
+
+    font-size:25px;
+
+    margin-bottom:5px;
+}
+
+.memory-caption p{
+    font-size:11px;
+
+    color:#99929c;
+}
+
+
+/* =========================================================
+   PROGRESS
+========================================================= */
+
+.progress{
+    display:flex;
+
+    justify-content:center;
+
+    gap:7px;
+
+    margin-top:30px;
+}
+
+.dot{
+    width:8px;
+    height:8px;
+
+    border-radius:50%;
+
+    background:#ddd;
+
+    transition:.3s;
+}
+
+.dot.active{
+    width:25px;
+
+    border-radius:20px;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--pink),
+            var(--blue)
+        );
+}
+
+
+/* =========================================================
+   QUIZ
+========================================================= */
+
+.quiz-box{
+    max-width:650px;
+
+    margin:40px auto;
+
+    padding:45px 30px;
+
+    background:
+        rgba(255,255,255,.75);
+
+    border-radius:30px;
+
+    box-shadow:
+        0 25px 70px
+        rgba(100,90,110,.1);
+}
+
+.quiz-question{
+    font-family:
+        "DM Serif Display",
+        serif;
+
+    font-size:35px;
+
+    margin-bottom:30px;
+}
+
+.answers{
+    display:grid;
+
+    gap:12px;
+}
+
+.answer{
+    padding:16px;
+
+    border:
+        1px solid
+        #eee5ec;
+
+    border-radius:15px;
+
+    background:white;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+    font-size:12px;
+}
+
+.answer:hover{
+    border-color:var(--pink);
+
+    transform:
+        translateY(-2px);
+}
+
+.answer.correct{
+    background:#e9f8ef;
+
+    border-color:#9bd6b0;
+}
+
+.answer.wrong{
+    background:#fff0f3;
+
+    border-color:#efb0c2;
+}
+
+
+/* =========================================================
+   FLOWERS
+========================================================= */
+
+.flower-grid{
+    display:flex;
+
+    justify-content:center;
+
+    gap:20px;
+
+    flex-wrap:wrap;
+
+    margin:45px auto;
+
+    max-width:700px;
+}
+
+.flower{
+    width:140px;
+    height:150px;
+
+    background:white;
+
+    border-radius:25px;
+
+    border:
+        2px solid
+        transparent;
+
+    cursor:pointer;
+
+    padding:20px;
+
+    transition:.4s;
+
+    box-shadow:
+        0 15px 35px
+        rgba(100,90,110,.08);
+}
+
+.flower:hover{
+    transform:
+        translateY(-10px)
+        rotate(2deg);
+}
+
+.flower.selected{
+    border-color:var(--pink-dark);
+
+    transform:
+        translateY(-10px)
+        scale(1.05);
+}
+
+.flower-icon{
+    font-size:55px;
+
+    display:block;
+
+    margin-bottom:8px;
+}
+
+.flower-name{
+    font-size:10px;
+
+    letter-spacing:1px;
+}
+
+
+/* =========================================================
+   ENVELOPE
+========================================================= */
+
+.envelope-area{
+    margin:40px auto;
+
+    width:340px;
+    height:230px;
+
+    position:relative;
+
+    cursor:pointer;
+}
+
+.envelope{
+    position:absolute;
+
+    inset:0;
+
+    background:#f4b8cf;
+
+    border-radius:10px;
+
+    box-shadow:
+        0 25px 60px
+        rgba(200,120,160,.2);
+}
+
+.envelope::before{
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+        linear-gradient(
+            135deg,
+            transparent 50%,
+            #e9a4c0 50%
+        );
+}
+
+.envelope-flap{
+    position:absolute;
+
+    top:0;
+    left:0;
+
+    width:100%;
+    height:55%;
+
+    background:#f8c8da;
+
+    clip-path:
+        polygon(
+            0 0,
+            50% 100%,
+            100% 0
+        );
+
+    transform-origin:top;
+
+    transition:
+        transform 1s
+        cubic-bezier(.68,-.55,.27,1.55);
+
+    z-index:3;
+}
+
+.envelope.open .envelope-flap{
+    transform:
+        rotateX(180deg);
+}
+
+.letter-paper-small{
+    position:absolute;
+
+    left:10%;
+
+    width:80%;
+    height:180px;
+
+    bottom:10px;
+
+    background:#fffdfd;
+
+    border-radius:5px;
+
+    z-index:2;
+
+    transition:
+        transform 1s
+        cubic-bezier(.68,-.55,.27,1.55);
+}
+
+.envelope.open .letter-paper-small{
+    transform:
+        translateY(-120px);
+}
+
+
+/* =========================================================
+   LETTER
+========================================================= */
+
+.full-letter{
+    max-width:750px;
+
+    background:white;
+
+    padding:
+        60px 10%;
+
+    border-radius:30px;
+
+    box-shadow:
+        0 30px 80px
+        rgba(100,90,110,.12);
+
+    text-align:left;
+}
+
+.full-letter h2{
+    font-family:
+        "DM Serif Display",
+        serif;
+
+    font-size:55px;
+
+    line-height:.95;
+
+    margin-bottom:40px;
+}
+
+.full-letter p{
+    font-size:13px;
+
+    line-height:2;
+
+    margin-bottom:22px;
+
+    color:#77717b;
+}
+
+.reveal-line{
+    opacity:0;
+
+    transform:
+        translateY(15px);
+
+    transition:
+        .8s ease;
+}
+
+.reveal-line.show{
+    opacity:1;
+
+    transform:
+        translateY(0);
+}
+
+.signature{
+    font-family:
+        "DM Serif Display",
+        serif;
+
+    font-size:28px!important;
+
+    font-style:italic;
+
+    color:var(--pink-dark)!important;
+
+    margin-top:40px;
+}
+
+
+/* =========================================================
+   FINAL
+========================================================= */
+
+.final-question{
+    font-family:
+        "DM Serif Display",
+        serif;
+
+    font-size:
+        clamp(50px,8vw,90px);
+
+    line-height:.9;
+
+    margin-bottom:50px;
+}
+
+.final-buttons{
+    display:flex;
+
+    justify-content:center;
+
+    gap:15px;
+}
+
+.no-btn{
+    border:
+        1px solid
+        #ddd;
+
+    background:white;
+
+    color:#999;
+
+    padding:15px 30px;
+
+    border-radius:50px;
+
+    cursor:pointer;
+
+    transition:.3s;
+}
+
+
+/* =========================================================
+   YES ENDING
+========================================================= */
+
+#ending{
+    position:fixed;
+
+    inset:0;
+
+    z-index:99999;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffe8f2,
+            #e6f7ff
+        );
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    text-align:center;
+
+    opacity:0;
+
+    visibility:hidden;
+
+    transition:1s;
+}
+
+#ending.show{
+    opacity:1;
+
+    visibility:visible;
+}
+
+.ending-title{
+    font-family:
+        "DM Serif Display",
+        serif;
+
+    font-size:
+        clamp(60px,10vw,120px);
+
+    line-height:.85;
+
+    color:#514955;
+}
+
+.ending-title i{
+    color:var(--pink-dark);
+}
+
+.ending-heart{
+    font-size:80px;
+
+    margin:50px;
+
+    animation:
+        heartbeat
+        1.2s
+        infinite;
+}
+
+
+/* =========================================================
+   FLOATING HEARTS
+========================================================= */
+
+.floating{
+    position:fixed;
+
+    bottom:-30px;
+
+    pointer-events:none;
+
+    z-index:99998;
+
+    animation:
+        floatUp
+        5s
+        linear
+        forwards;
+}
+
+
+/* =========================================================
+   ANIMATIONS
+========================================================= */
+
+@keyframes floatingGift{
+
+    0%,100%{
+        transform:
+            translateY(0);
+    }
+
+    50%{
+        transform:
+            translateY(-12px)
+            rotate(2deg);
+    }
+}
+
+@keyframes pulse{
+
+    0%,100%{
+        opacity:.3;
+    }
+
+    50%{
+        opacity:1;
+    }
+}
+
+@keyframes heartbeat{
+
+    0%,100%{
+        transform:scale(1);
+    }
+
+    50%{
+        transform:scale(1.2);
+    }
+}
+
+@keyframes floatUp{
+
+    0%{
+        opacity:0;
+
+        transform:
+            translateY(0)
+            scale(.5)
+            rotate(0);
+    }
+
+    15%{
+        opacity:1;
+    }
+
+    100%{
+        opacity:0;
+
+        transform:
+            translateY(-100vh)
+            scale(1.4)
+            rotate(30deg);
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media(max-width:700px){
+
+    .page{
+        padding:50px 6%;
+    }
+
+    .counter{
+        grid-template-columns:
+            repeat(3,1fr);
+    }
+
+    .counter-number{
+        font-size:32px;
+    }
+
+    .memory-container{
+        min-height:430px;
+    }
+
+    .memory-card img{
+        height:300px;
+    }
+
+    .flower{
+        width:120px;
+    }
+
+    .envelope-area{
+        transform:scale(.85);
+    }
+
+    .full-letter{
+        padding:45px 25px;
+    }
+
+    .full-letter h2{
+        font-size:45px;
+    }
+
+}
+
+
+/* =========================================================
+   CONFETTI
+========================================================= */
+
+.confetti{
+    position:fixed;
+
+    width:8px;
+    height:12px;
+
+    z-index:100000;
+
+    animation:
+        confettiFall
+        3s
+        ease-out
+        forwards;
+}
+
+@keyframes confettiFall{
+
+    0%{
+        opacity:1;
+
+        transform:
+            translateY(-30px)
+            rotate(0);
+    }
+
+    100%{
+        opacity:0;
+
+        transform:
+            translateY(100vh)
+            rotate(720deg);
+    }
+}
+
+</style>
+
 </head>
+
 
 <body>
 
-<!-- =====================================================
-     OPENING / GIFT BOX
-===================================================== -->
 
-<div id="opening-screen">
+<!-- =========================================================
+     START SCREEN
+========================================================= -->
 
-    <div class="opening-content">
+<div id="startScreen">
 
-        <p class="opening-small">
-            I have something for you...
+    <div class="start-content">
+
+        <p class="start-small">
+            I MADE SOMETHING FOR YOU
         </p>
 
-        <div class="gift-wrapper" id="gift">
+        <div
+            class="gift"
+            id="gift"
+            onclick="openGift()"
+        >
 
-            <div class="gift-lid">
-                <div class="ribbon-horizontal"></div>
-            </div>
+            <div class="gift-lid"></div>
 
             <div class="gift-box">
-                <div class="ribbon-vertical"></div>
+                <div class="ribbon"></div>
             </div>
 
-            <div class="gift-ribbon"></div>
+            <div class="bow"></div>
 
         </div>
 
-        <p class="click-text">
-            tap the gift ♡
+        <p class="start-hint">
+            TAP THE GIFT ♡
         </p>
 
     </div>
@@ -51,391 +1283,126 @@
 </div>
 
 
-<!-- =====================================================
-     MAIN WEBSITE
-===================================================== -->
+<!-- =========================================================
+     APP
+========================================================= -->
 
-<main id="main-content">
-
-
-    <!-- HERO -->
-    <section class="hero">
-
-        <div class="hero-overlay"></div>
-
-        <div class="hero-content">
-
-            <p class="eyebrow">
-                SEPTEMBER 3, 2026
-            </p>
-
-            <h1>
-                One Year<br>
-                <i>With You.</i>
-            </h1>
-
-            <p class="hero-subtitle">
-                365 days of us,<br>
-                and somehow I'd still choose you.
-            </p>
-
-            <div class="scroll-indicator">
-                ↓
-            </div>
-
-        </div>
-
-    </section>
+<div id="app">
 
 
-    <!-- INTRO -->
-    <section class="intro">
+<!-- =========================================================
+     PAGE 1 — WELCOME
+========================================================= -->
 
-        <p class="section-number">
-            01 — OUR STORY
+<section class="page active" id="page1">
+
+    <div class="content">
+
+        <p class="eyebrow">
+            FOR MY FAVORITE PERSON
         </p>
 
-        <h2>
-            It all started<br>
-            with <i>you.</i>
+        <h1 class="title">
+            Hi, <i>love.</i>
+        </h1>
+
+        <p class="subtitle">
+            Sebelum kita mulai perjalanan kecil ini,
+            aku cuma mau bilang satu hal...
+            aku senang banget kamu ada di hidup aku.
+        </p>
+
+        <button
+            class="btn"
+            onclick="nextPage()"
+        >
+            LET'S GO ♡
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     PAGE 2 — COUNTER
+========================================================= -->
+
+<section class="page" id="page2">
+
+    <div class="content">
+
+        <p class="eyebrow">
+            LOOK HOW FAR WE'VE COME
+        </p>
+
+        <h2 class="title">
+            <span id="days">365</span><br>
+            <i>days of us.</i>
         </h2>
 
-        <p class="intro-description">
-            Satu tahun mungkin cuma angka.
-            Tapi buat aku, satu tahun sama kamu adalah
-            kumpulan dari ratusan hari, ribuan percakapan,
-            banyak tawa, sedikit air mata, dan begitu
-            banyak alasan untuk bersyukur.
+        <p class="subtitle">
+            Dan kalau disuruh mengulang semuanya
+            dari awal lagi...
         </p>
 
-        <div class="date-container">
+        <div class="counter">
 
-            <div class="date">
-                <span>THE BEGINNING</span>
-                <strong>DD · MM · 2025</strong>
+            <div class="counter-box">
+                <div
+                    class="counter-number"
+                    id="daysCounter"
+                >
+                    365
+                </div>
+
+                <div class="counter-label">
+                    DAYS
+                </div>
             </div>
 
-            <div class="date-heart">
-                ♡
+            <div class="counter-box">
+
+                <div
+                    class="counter-number"
+                    id="hoursCounter"
+                >
+                    0
+                </div>
+
+                <div class="counter-label">
+                    HOURS
+                </div>
+
             </div>
 
-            <div class="date">
-                <span>ONE YEAR</span>
-                <strong>DD · MM · 2026</strong>
-            </div>
+            <div class="counter-box">
 
-        </div>
+                <div
+                    class="counter-number"
+                    id="minutesCounter"
+                >
+                    0
+                </div>
 
-    </section>
-
-
-    <!-- TIMELINE -->
-    <section class="memories">
-
-        <div class="section-heading">
-
-            <p class="section-number">
-                02 — OUR MEMORIES
-            </p>
-
-            <h2>
-                Little moments,<br>
-                <i>big memories.</i>
-            </h2>
-
-        </div>
-
-
-        <!-- MEMORY 1 -->
-        <div class="memory">
-
-            <div class="memory-photo">
-                <img src="images/photo-01.jpg" alt="Our first memory">
-            </div>
-
-            <div class="memory-text">
-
-                <span>THE BEGINNING</span>
-
-                <h3>
-                    The day<br>
-                    everything began.
-                </h3>
-
-                <p>
-                    Masukkan cerita kalian di sini.
-                    Bisa tentang pertama kali ketemu,
-                    pertama kali chat, atau momen ketika
-                    kalian sadar kalau hubungan ini
-                    mulai jadi sesuatu yang spesial.
-                </p>
+                <div class="counter-label">
+                    MINUTES
+                </div>
 
             </div>
 
         </div>
 
+        <button
+            class="btn"
+            onclick="nextPage()"
+        >
+            KEEP GOING →
+        </button>
 
-        <!-- MEMORY 2 -->
-        <div class="memory reverse">
+    </div>
 
-            <div class="memory-photo">
-                <img src="images/photo-02.jpg" alt="Our memory">
-            </div>
+</section>
 
-            <div class="memory-text">
 
-                <span>OUR FIRSTS</span>
-
-                <h3>
-                    So many<br>
-                    firsts with you.
-                </h3>
-
-                <p>
-                    First date, first photo together,
-                    first trip, first anniversary,
-                    dan semua "first" lainnya yang
-                    sekarang jadi bagian dari cerita kita.
-                </p>
-
-            </div>
-
-        </div>
-
-
-        <!-- MEMORY 3 -->
-        <div class="memory">
-
-            <div class="memory-photo">
-                <img src="images/photo-03.jpg" alt="Our everyday">
-            </div>
-
-            <div class="memory-text">
-
-                <span>THE ORDINARY DAYS</span>
-
-                <h3>
-                    Even ordinary days<br>
-                    feel special with you.
-                </h3>
-
-                <p>
-                    Ternyata aku nggak butuh sesuatu
-                    yang besar untuk merasa bahagia.
-                    Kadang cuma ngobrol sama kamu,
-                    jalan bareng, atau sekadar tahu
-                    kamu ada sudah cukup.
-                </p>
-
-            </div>
-
-        </div>
-
-
-        <!-- MEMORY 4 -->
-        <div class="memory reverse">
-
-            <div class="memory-photo">
-                <img src="images/photo-04.jpg" alt="Our journey">
-            </div>
-
-            <div class="memory-text">
-
-                <span>THROUGH EVERYTHING</span>
-
-                <h3>
-                    We made it<br>
-                    through everything.
-                </h3>
-
-                <p>
-                    Nggak semua hari selalu mudah.
-                    Tapi terima kasih karena di setiap
-                    keadaan, kita selalu berusaha untuk
-                    tetap saling memilih.
-                </p>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- PHOTO WALL -->
-    <section class="photo-wall">
-
-        <p class="section-number">
-            03 — JUST US
-        </p>
-
-        <h2>
-            A few pieces<br>
-            of <i>us.</i>
-        </h2>
-
-        <div class="photos">
-
-            <div class="photo photo-big">
-                <img src="images/photo-05.jpg" alt="Us">
-            </div>
-
-            <div class="photo">
-                <img src="images/photo-06.jpg" alt="Us">
-            </div>
-
-            <div class="photo">
-                <img src="images/photo-07.jpg" alt="Us">
-            </div>
-
-            <div class="photo">
-                <img src="images/photo-02.jpg" alt="Us">
-            </div>
-
-            <div class="photo">
-                <img src="images/photo-03.jpg" alt="Us">
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- LETTER -->
-    <section class="letter-section">
-
-        <p class="section-number">
-            04 — A LETTER FOR YOU
-        </p>
-
-        <div class="letter-paper">
-
-            <p class="letter-date">
-                September 3, 2026
-            </p>
-
-            <h2>
-                Dear<br>
-                <i>my favorite person,</i>
-            </h2>
-
-            <div class="letter-body">
-
-                <p>
-                    Hai sayang.
-                </p>
-
-                <p>
-                    Nggak kerasa ya, ternyata hari ini kita
-                    sudah satu tahun. Rasanya baru kemarin
-                    semuanya dimulai, tapi kalau dipikir-pikir,
-                    ternyata sudah banyak banget hal yang
-                    kita lewati bareng.
-                </p>
-
-                <p>
-                    Terima kasih sudah hadir di hidup aku.
-                    Terima kasih untuk semua perhatian kecil
-                    yang mungkin menurut kamu sederhana,
-                    tapi selalu berhasil bikin aku merasa
-                    disayang.
-                </p>
-
-                <p>
-                    Terima kasih sudah jadi tempat aku cerita,
-                    tempat aku ketawa, tempat aku marah,
-                    tempat aku pulang ketika hari sedang
-                    nggak baik-baik saja.
-                </p>
-
-                <p>
-                    Aku tahu aku nggak selalu sempurna.
-                    Ada kalanya aku keras kepala,
-                    terlalu banyak mikir, atau mungkin
-                    tanpa sadar bikin kamu capek.
-                </p>
-
-                <p>
-                    Tapi aku mau kamu tahu satu hal:
-                    <strong>
-                        aku selalu mau belajar untuk menjadi
-                        seseorang yang lebih baik buat kamu.
-                    </strong>
-                </p>
-
-                <p>
-                    Aku nggak tahu akan seperti apa
-                    tahun-tahun kita ke depan.
-                    Tapi kalau aku boleh memilih,
-                    aku ingin terus menemukan jawabannya
-                    bersama kamu.
-                </p>
-
-                <p>
-                    Semoga nanti, bertahun-tahun dari sekarang,
-                    kita bisa melihat kembali semua foto,
-                    semua cerita, dan website kecil ini,
-                    lalu tersenyum sambil bilang:
-                </p>
-
-                <p class="special-line">
-                    "Kita ternyata sudah sejauh ini."
-                </p>
-
-                <p>
-                    Happy first anniversary, sayang.
-                    Thank you for choosing me.
-                    And thank you for letting me choose you,
-                    every single day.
-                </p>
-
-                <p class="signature">
-                    I love you,<br>
-                    more than words can say. ♡
-                </p>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- FINAL -->
-    <section class="final">
-
-        <div class="final-content">
-
-            <p class="eyebrow">
-                ONE YEAR DOWN
-            </p>
-
-            <h2>
-                And many more<br>
-                <i>to go.</i>
-            </h2>
-
-            <div class="heart">
-                ♡
-            </div>
-
-            <p>
-                Thank you for being my favorite person.
-            </p>
-
-        </div>
-
-    </section>
-
-
-    <footer>
-        made with love, just for you ♡
-    </footer>
-
-</main>
-
-
-<script src="script.js"></script>
-
-</body>
-</html>
+<!-- ====================
