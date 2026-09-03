@@ -4,1452 +4,628 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Untuk Bubub Tercintah ♡</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<title>For You ♡</title>
 
 <style>
-
-/* =========================================================
-   RESET
-========================================================= */
-
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
-html{
-    scroll-behavior:smooth;
+html,
+body {
+    width: 100%;
+    min-height: 100%;
 }
 
-body{
-    font-family:"Poppins",sans-serif;
-    color:#514b56;
-    background:#fff8fc;
-    overflow:hidden;
-}
-
-button{
-    font-family:inherit;
-}
-
-button:focus{
-    outline:none;
+body {
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+    background: linear-gradient(135deg, #fff0f7, #edf9ff);
 }
 
 
-/* =========================================================
-   COLORS
-========================================================= */
+/* ==================================================
+   OPENING SCREEN
+================================================== */
 
-:root{
-    --pink:#f4abc9;
-    --pink-dark:#d979a5;
-    --pink-soft:#fff0f7;
+#opening {
+    position: fixed;
+    inset: 0;
 
-    --blue:#a9d9ef;
-    --blue-dark:#73b8da;
-    --blue-soft:#edfaff;
+    width: 100%;
+    height: 100vh;
 
-    --purple:#cbbbea;
-
-    --white:#fff;
-    --text:#514b56;
-    --muted:#99919c;
-}
-
-
-/* =========================================================
-   BACKGROUND
-========================================================= */
-
-body:before{
-    content:"";
-
-    position:fixed;
-
-    width:450px;
-    height:450px;
-
-    left:-180px;
-    top:-150px;
-
-    background:#f5b5d1;
-
-    filter:blur(140px);
-
-    opacity:.35;
-
-    z-index:-5;
-}
-
-body:after{
-    content:"";
-
-    position:fixed;
-
-    width:450px;
-    height:450px;
-
-    right:-180px;
-    bottom:-150px;
-
-    background:#a9d9ef;
-
-    filter:blur(140px);
-
-    opacity:.35;
-
-    z-index:-5;
-}
-
-
-/* =========================================================
-   START SCREEN
-========================================================= */
-
-#startScreen{
-    position:fixed;
-
-    inset:0;
-
-    z-index:9999;
-
-    display:flex;
-
-    justify-content:center;
-    align-items:center;
-
-    text-align:center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     background:
-        linear-gradient(
-            135deg,
-            #fff0f7,
-            #edfaff
-        );
+        radial-gradient(
+            circle at 20% 20%,
+            rgba(244, 171, 201, .35),
+            transparent 35%
+        ),
+        radial-gradient(
+            circle at 80% 80%,
+            rgba(169, 217, 239, .4),
+            transparent 35%
+        ),
+        #fff8fc;
+
+    z-index: 1000;
 
     transition:
-        opacity 1s ease,
-        visibility 1s ease;
+        opacity .8s ease,
+        visibility .8s ease;
 }
 
-#startScreen.hide{
-    opacity:0;
-    visibility:hidden;
-    pointer-events:none;
-}
-
-.start-small{
-    font-size:10px;
-
-    letter-spacing:4px;
-
-    color:#99919c;
-
-    margin-bottom:50px;
-}
-
-.start-hint{
-    margin-top:45px;
-
-    font-size:10px;
-
-    letter-spacing:3px;
-
-    color:#9c96a0;
-
-    animation:
-        hintPulse
-        2s
-        infinite;
+#opening.closed {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
 }
 
 
-/* =========================================================
+/* ==================================================
+   OPENING CONTENT
+================================================== */
+
+.opening-content {
+    text-align: center;
+    width: 100%;
+}
+
+.small-text {
+    margin-bottom: 35px;
+
+    font-size: 10px;
+    letter-spacing: 4px;
+
+    color: #9b929c;
+}
+
+
+/* ==================================================
+   GIFT BUTTON
+================================================== */
+
+#giftButton {
+    position: relative;
+
+    width: 230px;
+    height: 230px;
+
+    border: none;
+    outline: none;
+
+    background: transparent;
+
+    cursor: pointer;
+
+    display: block;
+
+    margin: 0 auto;
+
+    padding: 0;
+
+    -webkit-tap-highlight-color: transparent;
+
+    touch-action: manipulation;
+
+    z-index: 2000;
+}
+
+
+/* ==================================================
    GIFT
-========================================================= */
+================================================== */
 
-.gift{
-    width:190px;
-    height:180px;
+.gift {
+    position: absolute;
 
-    position:relative;
+    width: 190px;
+    height: 170px;
 
-    margin:auto;
+    left: 20px;
+    top: 30px;
 
-    cursor:pointer;
+    animation: floating 2s ease-in-out infinite;
 
-    touch-action:manipulation;
-
-    animation:
-        giftFloat
-        2.4s
-        ease-in-out
-        infinite;
+    transition: transform .2s ease;
 }
 
-.gift:hover{
-    transform:scale(1.05);
+#giftButton:active .gift {
+    transform: scale(.94);
 }
 
-.gift-box{
-    position:absolute;
 
-    width:155px;
-    height:105px;
+/* ==================================================
+   BOX BODY
+================================================== */
 
-    left:17px;
-    bottom:0;
+.box {
+    position: absolute;
+
+    width: 150px;
+    height: 100px;
+
+    left: 20px;
+    bottom: 0;
+
+    background: #f2a7c7;
+
+    border-radius: 8px;
+
+    box-shadow:
+        0 20px 40px rgba(210, 120, 165, .25);
+}
+
+
+/* vertical ribbon */
+
+.box::before {
+    content: "";
+
+    position: absolute;
+
+    width: 25px;
+    height: 100%;
+
+    left: 50%;
+    top: 0;
+
+    transform: translateX(-50%);
+
+    background: #dff5ff;
+}
+
+
+/* ==================================================
+   LID
+================================================== */
+
+.lid {
+    position: absolute;
+
+    width: 170px;
+    height: 38px;
+
+    left: 10px;
+    top: 38px;
+
+    background: #f6b4d0;
+
+    border-radius: 8px;
+
+    z-index: 5;
+
+    transition:
+        transform 1s
+        cubic-bezier(.68,-.55,.27,1.55);
+}
+
+
+/* lid ribbon */
+
+.lid::before {
+    content: "";
+
+    position: absolute;
+
+    width: 25px;
+    height: 100%;
+
+    left: 50%;
+    top: 0;
+
+    transform: translateX(-50%);
+
+    background: #dff5ff;
+}
+
+
+/* ==================================================
+   BOW
+================================================== */
+
+.bow {
+    position: absolute;
+
+    width: 80px;
+    height: 50px;
+
+    left: 55px;
+    top: 10px;
+
+    z-index: 10;
+
+    transition:
+        transform 1s
+        cubic-bezier(.68,-.55,.27,1.55);
+}
+
+.bow::before,
+.bow::after {
+    content: "";
+
+    position: absolute;
+
+    width: 34px;
+    height: 25px;
+
+    border: 8px solid #dff5ff;
+
+    border-radius: 50%;
+}
+
+.bow::before {
+    left: 0;
+    transform: rotate(25deg);
+}
+
+.bow::after {
+    right: 0;
+    transform: rotate(-25deg);
+}
+
+
+/* ==================================================
+   OPEN GIFT ANIMATION
+================================================== */
+
+#giftButton.open .lid {
+    transform:
+        translateY(-100px)
+        rotate(-12deg);
+}
+
+#giftButton.open .bow {
+    transform:
+        translateY(-100px)
+        rotate(-12deg);
+}
+
+#giftButton.open .gift {
+    animation: none;
+}
+
+
+/* ==================================================
+   TEXT
+================================================== */
+
+.hint {
+    margin-top: 35px;
+
+    font-size: 10px;
+    letter-spacing: 3px;
+
+    color: #958d97;
+
+    animation: pulse 1.8s infinite;
+}
+
+
+/* ==================================================
+   MAIN WEBSITE
+================================================== */
+
+#website {
+    width: 100%;
+    height: 100vh;
+
+    display: none;
+
+    overflow-y: auto;
 
     background:
         linear-gradient(
             135deg,
-            #f5b1cd,
-            #e999bb
+            #fff8fc,
+            #f3fbff
         );
-
-    border-radius:7px;
-
-    box-shadow:
-        0 25px 45px
-        rgba(211,122,165,.25);
 }
 
-.gift-box:before{
-    content:"";
-
-    position:absolute;
-
-    width:24px;
-    height:100%;
-
-    left:50%;
-
-    transform:translateX(-50%);
-
-    background:#dff4ff;
-}
-
-.gift-lid{
-    position:absolute;
-
-    width:180px;
-    height:40px;
-
-    left:5px;
-    top:40px;
-
-    background:#f6b5d0;
-
-    border-radius:7px;
-
-    z-index:5;
-
-    transition:
-        transform 1s
-        cubic-bezier(.68,-.55,.27,1.55);
-}
-
-.gift-lid:before{
-    content:"";
-
-    position:absolute;
-
-    width:24px;
-    height:100%;
-
-    left:50%;
-
-    transform:translateX(-50%);
-
-    background:#dff4ff;
-}
-
-.bow{
-    position:absolute;
-
-    width:75px;
-    height:40px;
-
-    top:15px;
-    left:57px;
-
-    z-index:10;
-
-    transition:
-        transform 1s
-        cubic-bezier(.68,-.55,.27,1.55);
-}
-
-.bow:before,
-.bow:after{
-    content:"";
-
-    position:absolute;
-
-    width:38px;
-    height:27px;
-
-    border:8px solid #dff4ff;
-
-    border-radius:50%;
-}
-
-.bow:before{
-    left:0;
-    transform:rotate(25deg);
-}
-
-.bow:after{
-    right:0;
-    transform:rotate(-25deg);
-}
-
-.gift.open{
-    animation:none;
-}
-
-.gift.open .gift-lid{
-    transform:
-        translateY(-85px)
-        rotate(-12deg);
-}
-
-.gift.open .bow{
-    transform:
-        translateY(-85px)
-        rotate(-12deg);
+#website.show {
+    display: block;
 }
 
 
-/* =========================================================
-   APP
-========================================================= */
-
-#app{
-    width:100%;
-    height:100vh;
-
-    opacity:0;
-    visibility:hidden;
-
-    transition:opacity 1s ease;
-}
-
-#app.show{
-    opacity:1;
-    visibility:visible;
-}
-
-
-/* =========================================================
+/* ==================================================
    PAGES
-========================================================= */
+================================================== */
 
-.page{
-    width:100%;
-    height:100vh;
+.page {
+    min-height: 100vh;
 
-    padding:50px 7%;
+    padding: 60px 25px;
 
-    display:none;
+    display: none;
 
-    justify-content:center;
-    align-items:center;
+    justify-content: center;
+    align-items: center;
 
-    overflow-y:auto;
+    text-align: center;
 }
 
-.page.active{
-    display:flex;
-
-    animation:
-        pageIn
-        .8s
-        ease;
+.page.active {
+    display: flex;
 }
 
-.content{
-    width:100%;
-    max-width:950px;
-
-    text-align:center;
-}
-
-.eyebrow{
-    font-size:10px;
-
-    letter-spacing:4px;
-
-    color:#a19aa4;
-
-    margin-bottom:25px;
-}
-
-.title{
-    font-family:
-        "DM Serif Display",
-        serif;
-
-    font-weight:400;
-
-    font-size:
-        clamp(55px,9vw,105px);
-
-    line-height:.88;
-
-    color:#514b56;
-}
-
-.title i{
-    color:var(--pink-dark);
-}
-
-.subtitle{
-    max-width:550px;
-
-    margin:30px auto;
-
-    font-size:13px;
-
-    line-height:2;
-
-    color:#89828c;
+.container {
+    width: 100%;
+    max-width: 850px;
+    margin: auto;
 }
 
 
-/* =========================================================
+/* ==================================================
+   TYPOGRAPHY
+================================================== */
+
+.eyebrow {
+    font-size: 10px;
+    letter-spacing: 4px;
+
+    color: #aaa1ab;
+
+    margin-bottom: 25px;
+}
+
+h1,
+h2 {
+    font-family: Georgia, serif;
+
+    font-weight: normal;
+
+    color: #554e58;
+}
+
+.main-title {
+    font-size: clamp(55px, 10vw, 100px);
+
+    line-height: .9;
+}
+
+.main-title span,
+h2 span {
+    color: #d97fa7;
+    font-style: italic;
+}
+
+.description {
+    max-width: 550px;
+
+    margin: 30px auto;
+
+    color: #88808b;
+
+    font-size: 13px;
+
+    line-height: 2;
+}
+
+
+/* ==================================================
    BUTTON
-========================================================= */
+================================================== */
 
-.btn{
-    border:0;
+.next {
+    border: none;
 
-    padding:15px 32px;
+    padding: 15px 30px;
 
-    border-radius:50px;
-
-    color:white;
+    border-radius: 50px;
 
     background:
         linear-gradient(
             135deg,
-            var(--pink),
-            var(--blue)
+            #efa5c5,
+            #a7d9ef
         );
 
-    cursor:pointer;
+    color: white;
 
-    font-size:11px;
+    cursor: pointer;
 
-    letter-spacing:1px;
+    font-size: 11px;
+
+    letter-spacing: 1px;
 
     box-shadow:
-        0 15px 35px
-        rgba(205,130,170,.2);
+        0 15px 30px
+        rgba(190, 130, 165, .2);
 
-    transition:.3s;
+    transition: .3s;
 }
 
-.btn:hover{
-    transform:
-        translateY(-4px)
-        scale(1.03);
-}
-
-.btn:active{
-    transform:scale(.96);
+.next:hover {
+    transform: translateY(-3px);
 }
 
 
-/* =========================================================
+/* ==================================================
    COUNTER
-========================================================= */
+================================================== */
 
-.counter{
-    max-width:650px;
+.counter {
+    display: flex;
 
-    margin:45px auto;
+    justify-content: center;
 
-    display:grid;
+    gap: 12px;
 
-    grid-template-columns:
-        repeat(3,1fr);
-
-    gap:12px;
+    margin: 40px auto;
 }
 
-.counter-card{
-    padding:25px 10px;
+.counter-item {
+    width: 130px;
 
-    background:
-        rgba(255,255,255,.7);
+    padding: 25px 10px;
 
-    border:
-        1px solid
-        rgba(255,255,255,.9);
+    background: white;
 
-    border-radius:20px;
+    border-radius: 20px;
 
     box-shadow:
         0 15px 40px
-        rgba(100,90,110,.08);
+        rgba(80, 70, 90, .08);
 }
 
-.counter-number{
-    font-family:
-        "DM Serif Display",
-        serif;
+.number {
+    font-family: Georgia, serif;
 
-    font-size:42px;
+    font-size: 38px;
 
-    color:var(--pink-dark);
+    color: #d97fa7;
 }
 
-.counter-label{
-    font-size:8px;
+.label {
+    margin-top: 5px;
 
-    letter-spacing:2px;
+    font-size: 8px;
 
-    color:#aaa2aa;
+    letter-spacing: 2px;
+
+    color: #aaa1ab;
 }
 
 
-/* =========================================================
-   MEMORY
-========================================================= */
+/* ==================================================
+   MEMORIES
+================================================== */
 
-.memory-wrapper{
-    position:relative;
+.memory {
+    max-width: 600px;
 
-    max-width:650px;
+    margin: 40px auto;
 
-    height:430px;
+    background: white;
 
-    margin:35px auto 15px;
-}
+    padding: 12px;
 
-.memory-card{
-    position:absolute;
-
-    inset:0;
-
-    background:white;
-
-    padding:12px;
-
-    border-radius:25px;
+    border-radius: 25px;
 
     box-shadow:
-        0 25px 60px
-        rgba(100,90,110,.12);
-
-    opacity:0;
-
-    transform:
-        translateX(100px)
-        rotate(5deg)
-        scale(.9);
-
-    transition:
-        .6s
-        cubic-bezier(.68,-.55,.27,1.55);
-
-    pointer-events:none;
+        0 20px 60px
+        rgba(80, 70, 90, .1);
 }
 
-.memory-card.active{
-    opacity:1;
+.memory img {
+    display: block;
 
-    transform:
-        translateX(0)
-        rotate(0)
-        scale(1);
+    width: 100%;
+    height: 350px;
 
-    pointer-events:auto;
+    object-fit: cover;
+
+    border-radius: 17px;
 }
 
-.memory-card img{
-    width:100%;
-    height:305px;
+.memory h3 {
+    font-family: Georgia, serif;
 
-    object-fit:cover;
+    margin-top: 18px;
 
-    border-radius:17px;
+    font-size: 25px;
+
+    color: #554e58;
 }
 
-.memory-caption{
-    padding:14px;
-}
+.memory p {
+    margin: 8px 0 15px;
 
-.memory-caption h3{
-    font-family:
-        "DM Serif Display",
-        serif;
+    font-size: 11px;
 
-    font-size:24px;
-
-    margin-bottom:3px;
-}
-
-.memory-caption p{
-    font-size:10px;
-
-    color:#99919c;
-}
-
-.memory-progress{
-    display:flex;
-
-    justify-content:center;
-
-    gap:6px;
-
-    margin:20px 0;
-}
-
-.memory-dot{
-    width:8px;
-    height:8px;
-
-    border-radius:20px;
-
-    background:#ddd;
-
-    transition:.3s;
-}
-
-.memory-dot.active{
-    width:25px;
-
-    background:
-        linear-gradient(
-            90deg,
-            var(--pink),
-            var(--blue)
-        );
+    color: #99919b;
 }
 
 
-/* =========================================================
+/* ==================================================
    QUIZ
-========================================================= */
+================================================== */
 
-.quiz{
-    max-width:650px;
+.quiz {
+    max-width: 600px;
 
-    margin:35px auto;
+    margin: 35px auto;
 
-    padding:40px 30px;
+    padding: 35px;
 
-    background:
-        rgba(255,255,255,.75);
+    background: white;
 
-    border-radius:30px;
-
-    box-shadow:
-        0 25px 70px
-        rgba(100,90,110,.1);
-}
-
-.question{
-    font-family:
-        "DM Serif Display",
-        serif;
-
-    font-size:32px;
-
-    line-height:1.1;
-
-    margin-bottom:30px;
-}
-
-.answers{
-    display:grid;
-
-    gap:10px;
-}
-
-.answer{
-    border:
-        1px solid
-        #eee4ec;
-
-    background:white;
-
-    padding:15px;
-
-    border-radius:15px;
-
-    cursor:pointer;
-
-    font-size:11px;
-
-    color:#6f6872;
-
-    transition:.3s;
-}
-
-.answer:hover{
-    transform:translateY(-2px);
-
-    border-color:#f1aecb;
-}
-
-.answer.correct{
-    background:#e9f8ef;
-
-    border-color:#9ed8b3;
-}
-
-.answer.wrong{
-    background:#fff0f4;
-
-    border-color:#efa9c1;
-}
-
-#quizMessage{
-    margin-top:20px;
-
-    min-height:20px;
-
-    font-size:11px;
-}
-
-
-/* =========================================================
-   FLOWER
-========================================================= */
-
-.flower-grid{
-    display:flex;
-
-    flex-wrap:wrap;
-
-    justify-content:center;
-
-    gap:15px;
-
-    max-width:650px;
-
-    margin:40px auto;
-}
-
-.flower{
-    width:130px;
-    height:140px;
-
-    border:2px solid transparent;
-
-    background:white;
-
-    border-radius:22px;
-
-    cursor:pointer;
+    border-radius: 25px;
 
     box-shadow:
-        0 15px 35px
-        rgba(100,90,110,.08);
-
-    transition:.35s;
-
-    padding:15px;
+        0 20px 60px
+        rgba(80, 70, 90, .1);
 }
 
-.flower:hover{
-    transform:
-        translateY(-8px)
-        rotate(2deg);
+.question {
+    font-family: Georgia, serif;
+
+    font-size: 28px;
+
+    margin-bottom: 25px;
 }
 
-.flower.selected{
-    border-color:var(--pink-dark);
+.answer {
+    display: block;
 
-    transform:
-        translateY(-8px)
-        scale(1.04);
+    width: 100%;
+
+    padding: 14px;
+
+    margin: 10px 0;
+
+    background: white;
+
+    border: 1px solid #eadfe6;
+
+    border-radius: 15px;
+
+    cursor: pointer;
+
+    color: #6e6770;
 }
 
-.flower-icon{
-    display:block;
-
-    font-size:50px;
-
-    margin-bottom:8px;
-}
-
-.flower-name{
-    font-size:9px;
-
-    letter-spacing:1px;
+.answer:hover {
+    border-color: #efa8c6;
 }
 
 
-/* =========================================================
-   ENVELOPE
-========================================================= */
+/* ==================================================
+   FLOWERS
+================================================== */
 
-.envelope-container{
-    width:350px;
-    height:240px;
+.flowers {
+    display: flex;
 
-    position:relative;
+    justify-content: center;
 
-    margin:35px auto 55px;
+    flex-wrap: wrap;
 
-    cursor:pointer;
+    gap: 15px;
+
+    margin: 35px auto;
 }
 
-.envelope{
-    position:absolute;
+.flower {
+    width: 125px;
+    height: 130px;
 
-    inset:0;
+    background: white;
 
-    background:#f0aec9;
+    border: 2px solid transparent;
 
-    border-radius:10px;
+    border-radius: 20px;
+
+    cursor: pointer;
+
+    font-size: 45px;
 
     box-shadow:
-        0 25px 60px
-        rgba(200,120,160,.2);
-}
-
-.envelope-flap{
-    position:absolute;
-
-    width:100%;
-    height:65%;
-
-    top:0;
-
-    background:#f8c7dc;
-
-    clip-path:
-        polygon(
-            0 0,
-            50% 100%,
-            100% 0
-        );
-
-    transform-origin:top;
-
-    transition:
-        transform 1s
-        cubic-bezier(.68,-.55,.27,1.55);
-
-    z-index:4;
-}
-
-.envelope-letter{
-    position:absolute;
-
-    width:82%;
-    height:190px;
-
-    left:9%;
-    bottom:5px;
-
-    background:#fff;
-
-    border-radius:5px;
-
-    z-index:2;
-
-    transition:
-        transform 1s
-        cubic-bezier(.68,-.55,.27,1.55);
-}
-
-.envelope.open .envelope-flap{
-    transform:rotateX(180deg);
-}
-
-.envelope.open .envelope-letter{
-    transform:translateY(-125px);
-}
-
-
-/* =========================================================
-   LETTER
-========================================================= */
-
-.letter{
-    max-width:750px;
-
-    margin:auto;
-
-    padding:55px 9%;
-
-    background:white;
-
-    border-radius:28px;
-
-    text-align:left;
-
-    box-shadow:
-        0 25px 70px
-        rgba(100,90,110,.1);
-}
-
-.letter h2{
-    font-family:
-        "DM Serif Display",
-        serif;
-
-    font-size:55px;
-
-    line-height:.9;
-
-    margin-bottom:40px;
-}
-
-.letter p{
-    font-size:12px;
-
-    line-height:2;
-
-    color:#77717b;
-
-    margin-bottom:20px;
-}
-
-.letter-line{
-    opacity:0;
-
-    transform:translateY(15px);
-
-    transition:.7s ease;
-}
-
-.letter-line.visible{
-    opacity:1;
-
-    transform:translateY(0);
-}
-
-.letter .special{
-    font-family:
-        "DM Serif Display",
-        serif;
-
-    font-size:25px;
-
-    text-align:center;
-
-    color:var(--pink-dark);
-}
-
-.signature{
-    font-family:
-        "DM Serif Display",
-        serif;
-
-    font-size:27px!important;
-
-    font-style:italic;
-
-    color:var(--pink-dark)!important;
-
-    margin-top:35px;
-}
-
-
-/* =========================================================
-   FINAL
-========================================================= */
-
-.final-title{
-    font-family:
-        "DM Serif Display",
-        serif;
-
-    font-size:
-        clamp(50px,8vw,95px);
-
-    line-height:.9;
-
-    margin-bottom:45px;
-}
-
-.final-title i{
-    color:var(--pink-dark);
-}
-
-.final-buttons{
-    display:flex;
-
-    justify-content:center;
-
-    gap:15px;
-}
-
-.no-button{
-    padding:15px 30px;
-
-    border:
-        1px solid
-        #ded8df;
-
-    background:white;
-
-    border-radius:50px;
-
-    color:#999;
-
-    cursor:pointer;
-}
-
-
-/* =========================================================
-   ENDING
-========================================================= */
-
-#ending{
-    position:fixed;
-
-    inset:0;
-
-    z-index:99999;
-
-    display:flex;
-
-    align-items:center;
-    justify-content:center;
-
-    text-align:center;
-
-    background:
-        linear-gradient(
-            135deg,
-            #ffe8f3,
-            #e5f7ff
-        );
-
-    opacity:0;
-
-    visibility:hidden;
-
-    transition:1s;
-}
-
-#ending.show{
-    opacity:1;
-
-    visibility:visible;
-}
-
-.ending-title{
-    font-family:
-        "DM Serif Display",
-        serif;
-
-    font-size:
-        clamp(60px,10vw,120px);
-
-    line-height:.85;
-}
-
-.ending-title i{
-    color:var(--pink-dark);
-}
-
-.ending-heart{
-    font-size:80px;
-
-    margin:45px 0;
-
-    animation:
-        heartBeat
-        1.2s
-        infinite;
-}
-
-
-/* =========================================================
-   FLOATING HEARTS
-========================================================= */
-
-.floating-heart{
-    position:fixed;
-
-    bottom:-40px;
-
-    z-index:100000;
-
-    pointer-events:none;
-
-    animation:
-        floatHeart
-        5s
-        linear
-        forwards;
-}
-
-
-/* =========================================================
-   CONFETTI
-========================================================= */
-
-.confetti{
-    position:fixed;
-
-    top:-20px;
-
-    width:8px;
-    height:12px;
-
-    z-index:100001;
-
-    pointer-events:none;
-
-    animation:
-        confettiFall
-        3s
-        linear
-        forwards;
-}
-
-
-/* =========================================================
-   ANIMATIONS
-========================================================= */
-
-@keyframes giftFloat{
-
-    0%,100%{
-        transform:translateY(0);
-    }
-
-    50%{
-        transform:translateY(-12px);
-    }
-
-}
-
-@keyframes hintPulse{
-
-    0%,100%{
-        opacity:.35;
-    }
-
-    50%{
-        opacity:1;
-    }
-
-}
-
-@keyframes pageIn{
-
-    from{
-        opacity:0;
-
-        transform:
-            scale(.97)
-            translateY(15px);
-    }
-
-    to{
-        opacity:1;
-
-        transform:
-            scale(1)
-            translateY(0);
-    }
-
-}
-
-@keyframes heartBeat{
-
-    0%,100%{
-        transform:scale(1);
-    }
-
-    50%{
-        transform:scale(1.2);
-    }
-
-}
-
-@keyframes floatHeart{
-
-    0%{
-        opacity:0;
-
-        transform:
-            translateY(0)
-            scale(.5)
-            rotate(0);
-    }
-
-    15%{
-        opacity:1;
-    }
-
-    100%{
-        opacity:0;
-
-        transform:
-            translateY(-100vh)
-            scale(1.5)
-            rotate(30deg);
-    }
-
-}
-
-@keyframes confettiFall{
-
-    0%{
-        opacity:1;
-
-        transform:
-            translateY(0)
-            rotate(0);
-    }
-
-    100%{
-        opacity:0;
-
-        transform:
-            translateY(110vh)
-            rotate(720deg);
-    }
-
-}
-
-
-/* =========================================================
-   MOBILE
-========================================================= */
-
-@media(max-width:700px){
-
-    .page{
-        padding:35px 6%;
-    }
-
-    .title{
-        font-size:65px;
-    }
-
-    .counter{
-        gap:8px;
-    }
-
-    .counter-card{
-        padding:20px 5px;
-    }
-
-    .counter-number{
-        font-size:32px;
-    }
-
-    .memory-wrapper{
-        height:420px;
-    }
-
-    .memory-card img{
-        height:300px;
-    }
-
-    .flower{
-        width:115px;
-        height:130px;
-    }
-
-    .flower-icon{
-        font-size:42px;
-    }
-
-    .envelope-container{
-        transform:scale(.85);
-        margin-top:10px;
-    }
-
-    .letter{
-        padding:45px 25px;
-    }
-
-    .letter h2{
-        font-size:45px;
-    }
-
-    .final-buttons{
-        flex-direction:column;
-        align-items:center;
-    }
-
-}
-
-</style>
-</head>
-
-
-<body>
-
-
-<!-- =========================================================
-     OPENING
-========================================================= -->
-
-<div id="startScreen">
-
-    <div>
-
-        <p class="start-small">
-            I MADE SOMETHING FOR YOU
-        </p>
-
-
-        <div
-            class="gift"
-            id="gift"
-        >
-
-            <div class="gift-box">
-
-                <div class="ribbon"></div>
-
-            </div>
-
-
-            <div class="gift-lid">
-
-                <div class="lid-ribbon"></div>
-
-            </div>
-
-
-            <div class="bow"></div>
-
-        </div>
-
-
-        <p class="start-hint">
-            TAP THE GIFT ♡
-        </p>
-
-    </div>
-
-</div>
-
-
-<!-- =========================================================
-     APP
-========================================================= -->
-
-<div id="app">
-
-
-<!-- =========================================================
-     PAGE 1
-========================================================= -->
-
-<section
-    class="page active"
-    id="page1"
->
-
-    <div class="content">
-
-        <p class="eyebrow">
-            WELCOME TO OUR LITTLE WORLD
-        </p>
-
-        <h1 class="title">
-            Hi,<br>
-            <i>my love.</i>
-        </h1>
-
-        <p class="subtitle">
-            Aku bikin sesuatu kecil buat kamu.
-            Jadi sebelum lanjut...
-            siap masuk ke perjalanan satu tahun kita?
-        </p>
-
-        <button
-            class="btn"
-            onclick="nextPage()"
-        >
-            I'M READY ♡
-        </button>
-
-    </div>
-
-</section>
-
-
-<!-- =========================================================
-     PAGE 2
-========================================================= -->
-
-<section
-    class="page"
-    id="page2"
->
-
-    <div class="content">
-
-        <p class="eyebrow">
-            OUR TIME TOGETHER
-        </p>
-
-        <h2 class="title">
-            <span id="bigDays">
-                0
-            </span>
-
-            <br>
-
-            <i>days of us.</i>
-        </h2>
-
-        <p class="subtitle">
-            Setiap angka di sini adalah satu hari
-            yang berhasil kita lewati bersama.
-        </p>
-
-
-        <div class="counter">
-
-            <div class="counter-card">
-
-                <div
-                    class="counter-number"
-                    id="days"
-                >
-                    0
-                </div>
-
-                <div class="counter-label">
-                    DAYS
-                </div>
-
-            </div>
-
-
-            <div class="counter-card">
-
-                <div
-                    class="counter-number"
-                    id="hours"
-                >
-                    0
-                </div>
-
-                <div class="counter-label">
-                    HOURS
-                </div>
-
-            </div>
-
-
-            <div class="counter-card">
-
-                <div
-                    class="counte
+        0 15px 30px
+        rgba
