@@ -1,34 +1,80 @@
+/* =====================================================
+   ANNIVERSARY WEBSITE
+   SCRIPT.JS
+===================================================== */
+
+
+/* =====================================================
+   ELEMENTS
+===================================================== */
+
 const gift = document.getElementById("gift");
 const openingScreen = document.getElementById("opening-screen");
 const mainContent = document.getElementById("main-content");
 
+
+/* =====================================================
+   OPENING STATE
+===================================================== */
+
 let opened = false;
 
-gift.addEventListener("click", () => {
 
-    if (opened) return;
+/* =====================================================
+   GIFT CLICK
+===================================================== */
 
-    opened = true;
+if (gift) {
 
-    // Open the gift
-    gift.classList.add("open");
+    gift.addEventListener("click", function () {
 
-    // Create little hearts
-    createHearts();
+        if (opened) return;
 
-    // Wait for gift animation
-    setTimeout(() => {
+        opened = true;
 
-        openingScreen.classList.add("hide");
 
-        mainContent.classList.add("show");
+        /* ---------------------------------------------
+           ADD OPEN CLASS
+        --------------------------------------------- */
 
-        // Allow page to scroll again
-        document.body.style.overflow = "auto";
+        gift.classList.add("open");
 
-    }, 1600);
 
-});
+        /* ---------------------------------------------
+           CREATE HEARTS
+        --------------------------------------------- */
+
+        createHearts();
+
+
+        /* ---------------------------------------------
+           MOVE TO MAIN CONTENT
+        --------------------------------------------- */
+
+        setTimeout(function () {
+
+            if (openingScreen) {
+
+                openingScreen.classList.add("hide");
+
+            }
+
+
+            if (mainContent) {
+
+                mainContent.classList.add("show");
+
+            }
+
+
+            document.body.style.overflow = "auto";
+
+
+        }, 1200);
+
+    });
+
+}
 
 
 /* =====================================================
@@ -37,38 +83,102 @@ gift.addEventListener("click", () => {
 
 function createHearts() {
 
-    for (let i = 0; i < 25; i++) {
+    const hearts = [
+        "♡",
+        "♥",
+        "♡",
+        "♥",
+        "♡"
+    ];
 
-        setTimeout(() => {
 
-            const heart = document.createElement("span");
+    for (let i = 0; i < 30; i++) {
+
+        setTimeout(function () {
+
+            const heart =
+                document.createElement("span");
+
+
+            heart.className =
+                "floating-heart";
+
 
             heart.innerHTML =
-                Math.random() > 0.5 ? "♡" : "♥";
+                hearts[
+                    Math.floor(
+                        Math.random() *
+                        hearts.length
+                    )
+                ];
 
-            heart.className = "floating-heart";
+
+            /* -----------------------------------------
+               POSITION
+            ----------------------------------------- */
 
             heart.style.left =
-                (40 + Math.random() * 20) + "vw";
+                (
+                    35 +
+                    Math.random() * 30
+                ) + "vw";
+
 
             heart.style.top =
-                (45 + Math.random() * 10) + "vh";
+                (
+                    45 +
+                    Math.random() * 10
+                ) + "vh";
+
+
+            /* -----------------------------------------
+               SIZE
+            ----------------------------------------- */
 
             heart.style.fontSize =
-                (10 + Math.random() * 20) + "px";
+                (
+                    12 +
+                    Math.random() * 22
+                ) + "px";
+
+
+            /* -----------------------------------------
+               RANDOM MOVEMENT
+            ----------------------------------------- */
+
+            heart.style.setProperty(
+                "--random-x",
+                Math.random()
+            );
+
 
             heart.style.animationDuration =
-                (1.5 + Math.random() * 2) + "s";
+                (
+                    1.5 +
+                    Math.random() * 2
+                ) + "s";
 
-            document.body.appendChild(heart);
 
-            setTimeout(() => {
+            document.body.appendChild(
+                heart
+            );
+
+
+            /* -----------------------------------------
+               REMOVE
+            ----------------------------------------- */
+
+            setTimeout(function () {
+
                 heart.remove();
+
             }, 4000);
 
-        }, i * 60);
+
+        }, i * 50);
 
     }
+
 }
 
 
@@ -76,67 +186,95 @@ function createHearts() {
    SCROLL REVEAL
 ===================================================== */
 
-const elements = document.querySelectorAll(
-    ".memory, .photo, .letter-paper, .intro"
-);
-
-const observer = new IntersectionObserver(
-    (entries) => {
-
-        entries.forEach(entry => {
-
-            if (entry.isIntersecting) {
-
-                entry.target.classList.add("visible");
-
-            }
-
-        });
-
-    },
-    {
-        threshold: 0.12
-    }
-);
-
-elements.forEach(element => {
-
-    element.style.opacity = "0";
-
-    element.style.transform =
-        "translateY(40px)";
-
-    element.style.transition =
-        "opacity 1s ease, transform 1s ease";
-
-    observer.observe(element);
-
-});
+const revealElements =
+    document.querySelectorAll(
+        ".memory, .photo, .letter-paper, .intro"
+    );
 
 
 /* =====================================================
-   EXTRA CSS FOR FLOATING HEARTS
+   INTERSECTION OBSERVER
 ===================================================== */
 
-const style = document.createElement("style");
+if (
+    "IntersectionObserver"
+    in window
+) {
 
-style.innerHTML = `
+    const observer =
+        new IntersectionObserver(
+
+            function (entries) {
+
+                entries.forEach(
+                    function (entry) {
+
+                        if (
+                            entry.isIntersecting
+                        ) {
+
+                            entry.target.classList.add(
+                                "visible"
+                            );
+
+                        }
+
+                    }
+                );
+
+            },
+
+            {
+                threshold: 0.12
+            }
+
+        );
+
+
+    revealElements.forEach(
+        function (element) {
+
+            observer.observe(
+                element
+            );
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   FLOATING HEART CSS
+===================================================== */
+
+const heartStyle =
+    document.createElement("style");
+
+
+heartStyle.innerHTML = `
 
 .floating-heart {
 
     position: fixed;
 
-    z-index: 10000;
+    z-index: 99999;
 
     pointer-events: none;
 
-    color: #b98780;
+    color: #d985a8;
+
+    font-family:
+        Georgia,
+        serif;
 
     animation:
         heartExplosion
-        2s ease-out
+        2s
+        ease-out
         forwards;
 }
+
 
 .memory.visible,
 .photo.visible,
@@ -149,6 +287,7 @@ style.innerHTML = `
         translateY(0) !important;
 }
 
+
 @keyframes heartExplosion {
 
     0% {
@@ -156,10 +295,22 @@ style.innerHTML = `
         opacity: 1;
 
         transform:
-            translate(0, 0)
-            scale(.5)
+            translate(
+                0,
+                0
+            )
+            scale(.4)
             rotate(0deg);
+
     }
+
+
+    40% {
+
+        opacity: 1;
+
+    }
+
 
     100% {
 
@@ -167,21 +318,53 @@ style.innerHTML = `
 
         transform:
             translate(
-                calc(-150px + 300px * var(--random-x)),
-                -250px
+                calc(
+                    -150px +
+                    300px *
+                    var(--random-x)
+                ),
+                -280px
             )
             scale(1.4)
-            rotate(25deg);
+            rotate(30deg);
+
     }
+
 }
 
 `;
 
-document.head.appendChild(style);
+
+document.head.appendChild(
+    heartStyle
+);
 
 
 /* =====================================================
-   LOCK SCROLL WHILE OPENING
+   INITIAL STATE
 ===================================================== */
 
-document.body.style.overflow = "hidden";
+if (openingScreen) {
+
+    openingScreen.classList.remove(
+        "hide"
+    );
+
+}
+
+
+if (mainContent) {
+
+    mainContent.classList.remove(
+        "show"
+    );
+
+}
+
+
+/* =====================================================
+   LOCK SCROLL
+===================================================== */
+
+document.body.style.overflow =
+    "hidden";
