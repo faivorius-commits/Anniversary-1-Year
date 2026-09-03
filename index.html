@@ -3,75 +3,43 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Our Little Story ♡</title>
+<title>Our First Anniversary ♡</title>
 
 <style>
-
-/* =====================================================
-   BASIC
-===================================================== */
-
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
-html,
-body {
+html, body {
     width: 100%;
-    height: 100%;
+    min-height: 100%;
 }
 
 body {
     font-family: Georgia, "Times New Roman", serif;
-
-    background:
-        linear-gradient(
-            135deg,
-            #fff4f9,
-            #f2f9ff
-        );
-
-    color: #5b5260;
-
+    background: #fff8fc;
+    color: #625866;
     overflow: hidden;
 }
 
-
-/* =====================================================
-   MAIN APP
-===================================================== */
-
-#app {
-    width: 100%;
-    height: 100vh;
-
-    position: relative;
-}
-
-
-/* =====================================================
-   ALL SCREENS
-===================================================== */
+/* =========================
+   SCREEN
+========================= */
 
 .screen {
-    position: absolute;
-
-    inset: 0;
-
     width: 100%;
-    height: 100%;
+    height: 100vh;
+    min-height: 600px;
 
     display: none;
-
-    justify-content: center;
     align-items: center;
+    justify-content: center;
+
+    padding: 25px;
 
     text-align: center;
-
-    padding: 30px;
 
     overflow-y: auto;
 }
@@ -80,253 +48,225 @@ body {
     display: flex;
 }
 
+.inner {
+    width: 100%;
+    max-width: 900px;
+    margin: auto;
+}
 
-/* =====================================================
-   OPENING / GIFT
-===================================================== */
+
+/* =========================
+   GIFT
+========================= */
 
 #giftScreen {
+    display: flex;
     background:
-        radial-gradient(
-            circle at 20% 20%,
-            rgba(244,174,205,.45),
-            transparent 35%
-        ),
-        radial-gradient(
-            circle at 80% 80%,
-            rgba(169,219,240,.45),
-            transparent 35%
-        ),
-        #fff8fc;
+        radial-gradient(circle at 20% 20%, #ffdbea 0, transparent 35%),
+        radial-gradient(circle at 80% 80%, #dff4ff 0, transparent 35%),
+        #fff9fc;
 }
 
-.gift-content {
-    width: 100%;
-    max-width: 500px;
-}
-
-.top-text {
+.small-label {
     font-family: Arial, sans-serif;
-
     font-size: 10px;
-
     letter-spacing: 4px;
-
-    color: #9c929d;
-
-    margin-bottom: 35px;
+    color: #a69ca6;
+    margin-bottom: 30px;
 }
 
-
-/* =====================================================
-   REAL BUTTON GIFT
-===================================================== */
-
-#gift {
-    width: 230px;
-    height: 230px;
-
+.gift-button {
     position: relative;
 
-    border: 0;
-
-    background: transparent;
-
-    cursor: pointer;
+    width: 280px;
+    height: 280px;
 
     display: block;
 
     margin: 0 auto;
 
-    padding: 0;
+    border: none;
+    outline: none;
 
-    touch-action: manipulation;
+    background: transparent;
+
+    cursor: pointer;
 
     -webkit-tap-highlight-color: transparent;
+
+    touch-action: manipulation;
 }
 
-#gift:active {
+.gift-button:active {
     transform: scale(.94);
 }
 
+/* box */
 
-/* =====================================================
-   GIFT BODY
-===================================================== */
-
-.gift-body {
+.gift-box {
     position: absolute;
 
-    width: 150px;
-    height: 105px;
+    left: 55px;
+    bottom: 35px;
 
-    left: 40px;
-    bottom: 20px;
+    width: 170px;
+    height: 125px;
 
-    background:
-        linear-gradient(
-            135deg,
-            #f4b0ce,
-            #e99bbd
-        );
+    background: linear-gradient(
+        135deg,
+        #f5a9c9,
+        #e990b6
+    );
 
     border-radius: 8px;
 
     box-shadow:
-        0 20px 40px
-        rgba(205,126,165,.25);
+        0 20px 40px rgba(200, 120, 160, .25);
 }
 
+/* vertical ribbon */
 
-/* ribbon */
-
-.gift-body::after {
+.gift-box::after {
     content: "";
 
     position: absolute;
 
-    width: 25px;
-    height: 100%;
-
     left: 50%;
-
     top: 0;
+
+    width: 28px;
+    height: 100%;
 
     transform: translateX(-50%);
 
     background: #dff4ff;
 }
 
-
-/* =====================================================
-   GIFT LID
-===================================================== */
+/* lid */
 
 .gift-lid {
     position: absolute;
 
-    width: 175px;
-    height: 42px;
+    left: 43px;
+    top: 85px;
 
-    left: 27px;
-    top: 72px;
+    width: 195px;
+    height: 48px;
 
-    border-radius: 8px;
+    border-radius: 9px;
 
-    background: #f6b6d2;
+    background: #f7afd0;
 
     z-index: 5;
 
     transition:
-        transform .9s
-        cubic-bezier(.68,-.55,.27,1.55);
+        transform .7s ease;
 }
+
+/* ribbon on lid */
 
 .gift-lid::after {
     content: "";
 
     position: absolute;
 
-    width: 25px;
-    height: 100%;
-
     left: 50%;
-
     top: 0;
+
+    width: 28px;
+    height: 100%;
 
     transform: translateX(-50%);
 
     background: #dff4ff;
 }
 
+/* bow */
 
-/* =====================================================
-   BOW
-===================================================== */
-
-.bow {
+.bow-left,
+.bow-right,
+.bow-center {
     position: absolute;
-
-    width: 85px;
-    height: 55px;
-
-    left: 72px;
-    top: 43px;
-
     z-index: 10;
-
-    transition:
-        transform .9s
-        cubic-bezier(.68,-.55,.27,1.55);
 }
 
-.bow::before,
-.bow::after {
-    content: "";
+.bow-left,
+.bow-right {
+    width: 60px;
+    height: 42px;
 
-    position: absolute;
+    top: 48px;
 
-    width: 35px;
-    height: 27px;
-
-    border: 8px solid #dff4ff;
+    background: #dff4ff;
 
     border-radius: 50%;
 }
 
-.bow::before {
-    left: 0;
-
+.bow-left {
+    left: 78px;
     transform: rotate(25deg);
 }
 
-.bow::after {
-    right: 0;
-
+.bow-right {
+    right: 78px;
     transform: rotate(-25deg);
 }
 
+.bow-center {
+    width: 28px;
+    height: 28px;
 
-/* =====================================================
-   GIFT OPEN
-===================================================== */
+    left: 126px;
+    top: 65px;
 
-#gift.open .gift-lid {
-    transform:
-        translateY(-100px)
-        rotate(-12deg);
+    border-radius: 50%;
+
+    background: #c7eafa;
 }
 
-#gift.open .bow {
+/* opened */
+
+.gift-button.open .gift-lid {
     transform:
-        translateY(-100px)
-        rotate(-12deg);
+        translateY(-105px)
+        rotate(-8deg);
 }
 
+.gift-button.open .bow-left {
+    transform:
+        translate(-25px, -105px)
+        rotate(25deg);
+}
 
-/* =====================================================
-   GIFT TEXT
-===================================================== */
+.gift-button.open .bow-right {
+    transform:
+        translate(25px, -105px)
+        rotate(-25deg);
+}
 
-.gift-hint {
+.gift-button.open .bow-center {
+    transform:
+        translateY(-105px);
+}
+
+.tap-text {
+    margin-top: 25px;
+
     font-family: Arial, sans-serif;
 
-    margin-top: 30px;
-
-    font-size: 10px;
+    font-size: 11px;
 
     letter-spacing: 3px;
 
-    color: #938a96;
+    color: #9c919b;
 
-    animation:
-        pulse 1.8s infinite;
+    animation: pulse 1.5s infinite;
 }
 
 
-/* =====================================================
+/* =========================
    TYPOGRAPHY
-===================================================== */
+========================= */
 
 .eyebrow {
     font-family: Arial, sans-serif;
@@ -335,41 +275,32 @@ body {
 
     letter-spacing: 4px;
 
-    color: #a59ca6;
+    color: #aaa0aa;
 
     margin-bottom: 25px;
 }
 
-h1,
-h2 {
+h1, h2 {
     font-weight: normal;
 }
 
-.big-title {
-    font-size:
-        clamp(
-            55px,
-            10vw,
-            105px
-        );
-
-    line-height: .86;
-
-    color: #574f59;
+.title {
+    font-size: clamp(55px, 10vw, 100px);
+    line-height: .88;
+    color: #5b525d;
 }
 
-.big-title em {
-    color: #d980a7;
-
+.title em {
+    color: #d982a8;
     font-style: italic;
 }
 
-.description {
-    font-family: Arial, sans-serif;
-
-    max-width: 550px;
+.text {
+    max-width: 580px;
 
     margin: 30px auto;
+
+    font-family: Arial, sans-serif;
 
     font-size: 13px;
 
@@ -379,35 +310,22 @@ h2 {
 }
 
 
-/* =====================================================
-   CONTENT
-===================================================== */
-
-.content {
-    width: 100%;
-
-    max-width: 900px;
-
-    margin: auto;
-}
-
-
-/* =====================================================
+/* =========================
    BUTTON
-===================================================== */
+========================= */
 
-.next-btn {
-    border: 0;
+.continue-button {
+    border: none;
 
-    padding: 15px 32px;
+    padding: 16px 32px;
 
     border-radius: 50px;
 
     background:
         linear-gradient(
             135deg,
-            #eda3c4,
-            #a8d9ee
+            #eda4c5,
+            #acdcef
         );
 
     color: white;
@@ -416,31 +334,30 @@ h2 {
 
     font-size: 10px;
 
-    letter-spacing: 1px;
+    letter-spacing: 1.5px;
 
     cursor: pointer;
 
     box-shadow:
-        0 15px 35px
-        rgba(200,130,170,.2);
+        0 12px 30px rgba(190, 130, 165, .22);
 
-    transition: .3s;
+    transition: .25s;
+
+    touch-action: manipulation;
 }
 
-.next-btn:hover {
-    transform:
-        translateY(-3px)
-        scale(1.03);
+.continue-button:hover {
+    transform: translateY(-3px);
 }
 
-.next-btn:active {
-    transform: scale(.96);
+.continue-button:active {
+    transform: scale(.95);
 }
 
 
-/* =====================================================
+/* =========================
    COUNTER
-===================================================== */
+========================= */
 
 .counter {
     display: flex;
@@ -449,32 +366,31 @@ h2 {
 
     gap: 12px;
 
-    margin: 40px auto;
-
     flex-wrap: wrap;
+
+    margin: 35px auto;
 }
 
-.counter-box {
+.counter-item {
     width: 125px;
 
-    padding: 25px 10px;
+    padding: 22px 10px;
 
-    background: rgba(255,255,255,.8);
+    background: rgba(255,255,255,.85);
 
     border-radius: 20px;
 
     box-shadow:
-        0 15px 40px
-        rgba(90,80,100,.08);
+        0 15px 40px rgba(100,80,100,.08);
 }
 
-.counter-number {
+.number {
     font-size: 38px;
 
-    color: #d77fa5;
+    color: #d67fa5;
 }
 
-.counter-label {
+.unit {
     margin-top: 6px;
 
     font-family: Arial, sans-serif;
@@ -483,96 +399,121 @@ h2 {
 
     letter-spacing: 2px;
 
-    color: #aaa1ab;
+    color: #aaa1aa;
 }
 
 
-/* =====================================================
+/* =========================
    MEMORIES
-===================================================== */
+========================= */
 
-.memory-box {
+.memory-card {
+    width: 100%;
     max-width: 650px;
 
-    margin: 35px auto;
-
-    background: white;
+    margin: 30px auto;
 
     padding: 12px;
+
+    background: white;
 
     border-radius: 25px;
 
     box-shadow:
-        0 20px 60px
-        rgba(80,70,90,.1);
+        0 20px 60px rgba(80,70,90,.10);
 }
 
-.memory-box img {
-    display: block;
-
+.photo {
     width: 100%;
-
     height: 350px;
 
+    border-radius: 18px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffddeb,
+            #e2f5ff
+        );
+}
+
+.photo img {
+    width: 100%;
+    height: 100%;
+
     object-fit: cover;
-
-    border-radius: 17px;
 }
 
-.memory-title {
-    margin-top: 18px;
-
-    font-size: 25px;
-
-    color: #574f59;
-}
-
-.memory-text {
+.photo-placeholder {
     font-family: Arial, sans-serif;
 
-    margin-top: 8px;
+    font-size: 11px;
 
-    margin-bottom: 15px;
+    letter-spacing: 2px;
+
+    color: #b18fa2;
+}
+
+.memory-name {
+    margin-top: 18px;
+
+    font-size: 26px;
+
+    color: #5c535e;
+}
+
+.memory-description {
+    margin: 8px 10px 15px;
+
+    font-family: Arial, sans-serif;
 
     font-size: 11px;
+
+    line-height: 1.7;
 
     color: #99919a;
 }
 
 
-/* =====================================================
+/* =========================
    LETTER
-===================================================== */
+========================= */
 
 .letter {
+    width: 100%;
     max-width: 700px;
 
-    margin: 30px auto;
+    margin: 25px auto;
 
-    padding: 45px 40px;
+    padding: 42px;
 
-    background: white;
+    background: #fff;
 
     border-radius: 25px;
 
-    text-align: left;
-
     box-shadow:
-        0 20px 60px
-        rgba(80,70,90,.1);
+        0 20px 60px rgba(80,70,90,.10);
+
+    text-align: left;
 }
 
-.letter h2 {
+.letter-title {
     font-size: 48px;
 
     line-height: .95;
 
-    margin-bottom: 35px;
+    margin-bottom: 30px;
 }
 
-.letter h2 em {
+.letter-title em {
     color: #d77fa5;
-
     font-style: italic;
 }
 
@@ -583,33 +524,28 @@ h2 {
 
     line-height: 2;
 
-    color: #756e78;
+    color: #766e78;
 
-    margin-bottom: 20px;
+    margin-bottom: 18px;
 }
 
 .signature {
     font-family: Georgia, serif !important;
 
-    color: #d77fa5 !important;
-
     font-size: 24px !important;
+
+    color: #d77fa5 !important;
 
     font-style: italic;
 }
 
 
-/* =====================================================
+/* =========================
    FINAL
-===================================================== */
+========================= */
 
 .final-title {
-    font-size:
-        clamp(
-            50px,
-            9vw,
-            95px
-        );
+    font-size: clamp(48px, 9vw, 90px);
 
     line-height: .88;
 
@@ -618,7 +554,6 @@ h2 {
 
 .final-title em {
     color: #d77fa5;
-
     font-style: italic;
 }
 
@@ -632,95 +567,84 @@ h2 {
     gap: 15px;
 }
 
-.no-btn {
-    padding: 15px 30px;
+.no-button {
+    padding: 16px 32px;
 
-    border: 1px solid #ddd6de;
-
-    background: white;
+    border: 1px solid #ddd7de;
 
     border-radius: 50px;
+
+    background: white;
 
     color: #999;
 
     cursor: pointer;
+
+    touch-action: manipulation;
 }
 
 
-/* =====================================================
-   ANNIVERSARY END
-===================================================== */
+/* =========================
+   ANNIVERSARY
+========================= */
 
-#anniversary {
+#anniversaryScreen {
     background:
         radial-gradient(
             circle at center,
-            #fff,
-            #ffeaf4 45%,
-            #e8f7ff
+            #ffffff,
+            #ffeaf4 50%,
+            #e6f7ff
         );
 }
 
 .anniversary-title {
-    font-size:
-        clamp(
-            55px,
-            10vw,
-            110px
-        );
+    font-size: clamp(55px, 10vw, 105px);
 
-    line-height: .85;
+    line-height: .86;
 }
 
 .anniversary-title em {
     color: #d77fa5;
-
     font-style: italic;
 }
 
-.big-heart {
+.heart-big {
     font-family: Arial, sans-serif;
 
     font-size: 75px;
 
-    margin: 35px 0;
+    margin: 30px;
 
     animation:
-        heartbeat
-        1.2s
-        infinite;
+        heartbeat 1.2s infinite;
 }
 
 
-/* =====================================================
-   FLOATING HEART
-===================================================== */
+/* =========================
+   FLOATING HEARTS
+========================= */
 
-.heart {
+.floating-heart {
     position: fixed;
 
-    bottom: -50px;
+    bottom: -40px;
 
-    z-index: 9999;
+    z-index: 99999;
 
     pointer-events: none;
 
     animation:
-        floatHeart
-        5s
-        linear
-        forwards;
+        floatUp 5s linear forwards;
 }
 
 
-/* =====================================================
+/* =========================
    ANIMATION
-===================================================== */
+========================= */
 
 @keyframes pulse {
-
-    0%,
-    100% {
+    0%, 100% {
         opacity: .4;
     }
 
@@ -730,9 +654,7 @@ h2 {
 }
 
 @keyframes heartbeat {
-
-    0%,
-    100% {
+    0%, 100% {
         transform: scale(1);
     }
 
@@ -741,14 +663,12 @@ h2 {
     }
 }
 
-@keyframes floatHeart {
-
+@keyframes floatUp {
     0% {
         opacity: 0;
-
         transform:
             translateY(0)
-            scale(.5);
+            scale(.6);
     }
 
     15% {
@@ -757,49 +677,56 @@ h2 {
 
     100% {
         opacity: 0;
-
         transform:
             translateY(-100vh)
-            scale(1.5)
-            rotate(25deg);
+            scale(1.4)
+            rotate(20deg);
     }
 }
 
 
-/* =====================================================
+/* =========================
    MOBILE
-===================================================== */
+========================= */
 
 @media (max-width: 600px) {
 
     .screen {
-        padding: 25px 18px;
+        min-height: 100vh;
+        padding: 20px 16px;
     }
 
-    .counter-box {
+    .gift-button {
+        transform: scale(.85);
+    }
+
+    .gift-button:active {
+        transform: scale(.8);
+    }
+
+    .counter-item {
         width: 100px;
     }
 
-    .counter-number {
+    .number {
         font-size: 30px;
     }
 
-    .memory-box img {
-        height: 300px;
+    .photo {
+        height: 280px;
     }
 
     .letter {
-        padding: 35px 23px;
+        padding: 30px 22px;
     }
 
-    .letter h2 {
-        font-size: 40px;
+    .letter-title {
+        font-size: 39px;
     }
 
     .final-buttons {
         flex-direction: column;
     }
-
 }
 </style>
 </head>
@@ -811,44 +738,49 @@ h2 {
 <div id="app">
 
 
-<!-- =====================================================
+<!-- ==================================================
      1. GIFT
-===================================================== -->
+================================================== -->
 
 <section
     id="giftScreen"
     class="screen active"
 >
 
-    <div class="gift-content">
+    <div class="inner">
 
-        <div class="top-text">
-            I MADE SOMETHING FOR YOU
+        <div class="small-label">
+            A LITTLE SOMETHING FOR YOU
         </div>
 
 
         <!--
-            GIFT ADALAH BUTTON ASLI.
-            KLIK DI SINI.
+            INI TOMBOL GIFT.
+            TAP / KLIK BAGIAN MANA PUN DARI GIFT.
         -->
 
         <button
-            id="gift"
+            class="gift-button"
+            id="giftButton"
+            onclick="openGift()"
             type="button"
-            aria-label="Buka hadiah"
         >
 
-            <div class="gift-body"></div>
+            <div class="gift-box"></div>
 
             <div class="gift-lid"></div>
 
-            <div class="bow"></div>
+            <div class="bow-left"></div>
+
+            <div class="bow-right"></div>
+
+            <div class="bow-center"></div>
 
         </button>
 
 
-        <div class="gift-hint">
-            TAP THE GIFT ♡
+        <div class="tap-text">
+            TAP TO OPEN ♡
         </div>
 
     </div>
@@ -857,40 +789,38 @@ h2 {
 
 
 
-<!-- =====================================================
+<!-- ==================================================
      2. WELCOME
-===================================================== -->
+================================================== -->
 
 <section
     id="welcomeScreen"
     class="screen"
 >
 
-    <div class="content">
+    <div class="inner">
 
         <div class="eyebrow">
-            WELCOME TO OUR LITTLE WORLD
+            WELCOME
         </div>
 
-
-        <h1 class="big-title">
+        <h1 class="title">
             Hi,<br>
             <em>my love.</em>
         </h1>
 
-
-        <p class="description">
-            Aku bikin sebuah perjalanan kecil
-            tentang kita.
-            Dari awal, sampai hari ini.
+        <p class="text">
+            Aku punya satu perjalanan kecil
+            yang ingin aku tunjukkan ke kamu.
+            Tentang kita, tentang satu tahun
+            yang sudah kita lewati bersama.
         </p>
 
-
         <button
-            class="next-btn"
-            data-next="counterScreen"
+            class="continue-button"
+            onclick="goTo('counterScreen')"
         >
-            LET'S BEGIN ♡
+            LET'S GO ♡
         </button>
 
     </div>
@@ -899,96 +829,83 @@ h2 {
 
 
 
-<!-- =====================================================
+<!-- ==================================================
      3. COUNTER
-===================================================== -->
+================================================== -->
 
 <section
     id="counterScreen"
     class="screen"
 >
 
-    <div class="content">
+    <div class="inner">
 
         <div class="eyebrow">
-            OUR TIME TOGETHER
+            SINCE 18 SEPTEMBER 2025
         </div>
 
-
-        <h2 class="big-title">
-
-            <span id="daysBig">
-                0
-            </span>
-
+        <h2 class="title">
+            <span id="daysBig">0</span>
             <br>
-
             <em>days of us.</em>
-
         </h2>
 
-
-        <p class="description">
-            Setiap hari yang kita lewati
-            adalah bagian dari cerita kita.
+        <p class="text">
+            Dari 18 September 2025 sampai hari ini,
+            kita sudah mengumpulkan begitu banyak
+            waktu, cerita, dan kenangan.
         </p>
 
 
         <div class="counter">
 
-            <div class="counter-box">
-
+            <div class="counter-item">
                 <div
-                    class="counter-number"
+                    class="number"
                     id="days"
                 >
                     0
                 </div>
 
-                <div class="counter-label">
+                <div class="unit">
                     DAYS
                 </div>
-
             </div>
 
 
-            <div class="counter-box">
-
+            <div class="counter-item">
                 <div
-                    class="counter-number"
+                    class="number"
                     id="hours"
                 >
                     0
                 </div>
 
-                <div class="counter-label">
+                <div class="unit">
                     HOURS
                 </div>
-
             </div>
 
 
-            <div class="counter-box">
-
+            <div class="counter-item">
                 <div
-                    class="counter-number"
+                    class="number"
                     id="minutes"
                 >
                     0
                 </div>
 
-                <div class="counter-label">
+                <div class="unit">
                     MINUTES
                 </div>
-
             </div>
 
         </div>
 
 
         <button
-            class="next-btn"
-            data-next="memoriesScreen"
+            class="continue-button"
+            onclick="goTo('memoriesScreen')"
         >
             OUR MEMORIES →
         </button>
@@ -999,69 +916,74 @@ h2 {
 
 
 
-<!-- =====================================================
+<!-- ==================================================
      4. MEMORIES
-===================================================== -->
+================================================== -->
 
 <section
     id="memoriesScreen"
     class="screen"
 >
 
-    <div class="content">
+    <div class="inner">
 
         <div class="eyebrow">
-            MEMORY LANE
+            MEMORIES
         </div>
 
-
-        <h2 class="big-title">
+        <h2 class="title">
             Little pieces<br>
             of <em>us.</em>
         </h2>
 
 
-        <div class="memory-box">
+        <div class="memory-card">
 
-            <!--
-                FOTO 1
+            <div class="photo">
 
-                Buat folder:
+                <!--
+                    MASUKKAN FOTO KALIAN DI:
 
-                images/
+                    images/photo1.jpg
 
-                lalu masukkan foto dengan nama:
+                    Kalau belum ada,
+                    placeholder akan muncul.
+                -->
 
-                photo1.jpg
-            -->
+                <img
+                    src="images/photo1.jpg"
+                    alt="Our memory"
+                    onerror="showPlaceholder(this)"
+                >
 
-            <img
-                src="images/photo1.jpg"
-                alt="Our memory"
-                onerror="
-                    this.src='https://placehold.co/800x500/fff0f7/d77fa5?text=YOUR+PHOTO+HERE';
-                "
-            >
+                <div
+                    class="photo-placeholder"
+                    style="display:none"
+                >
+                    YOUR PHOTO ♡
+                </div>
 
-
-            <div class="memory-title">
-                The beginning ♡
             </div>
 
 
-            <div class="memory-text">
+            <div class="memory-name">
+                Our favorite memory
+            </div>
+
+
+            <div class="memory-description">
                 Ganti tulisan ini dengan cerita
-                tentang kenangan pertama kalian.
+                tentang foto atau kenangan kalian.
             </div>
 
         </div>
 
 
         <button
-            class="next-btn"
-            data-next="letterScreen"
+            class="continue-button"
+            onclick="goTo('letterScreen')"
         >
-            I HAVE A LETTER FOR YOU →
+            I HAVE SOMETHING TO SAY →
         </button>
 
     </div>
@@ -1070,25 +992,25 @@ h2 {
 
 
 
-<!-- =====================================================
+<!-- ==================================================
      5. LETTER
-===================================================== -->
+================================================== -->
 
 <section
     id="letterScreen"
     class="screen"
 >
 
-    <div class="content">
+    <div class="inner">
 
         <div class="eyebrow">
-            FROM MY HEART
+            A LETTER FOR YOU
         </div>
 
 
         <div class="letter">
 
-            <h2>
+            <h2 class="letter-title">
                 Dear<br>
                 <em>my favorite person,</em>
             </h2>
@@ -1100,62 +1022,57 @@ h2 {
 
 
             <p>
-                Nggak kerasa ya, ternyata kita
-                sudah sampai di satu tahun.
-                Rasanya baru kemarin semuanya
-                dimulai, tapi ternyata kita sudah
-                punya banyak banget cerita.
+                Nggak kerasa kita sudah sampai
+                di satu tahun. Kalau dipikir-pikir,
+                satu tahun mungkin terdengar sebentar,
+                tapi ternyata di dalamnya ada begitu
+                banyak cerita tentang kita.
             </p>
 
 
             <p>
-                Terima kasih sudah hadir di hidup aku.
+                Terima kasih karena sudah hadir.
                 Terima kasih untuk semua perhatian kecil,
-                semua waktu, semua tawa, dan semua
-                momen yang kita lewati bersama.
+                semua tawa, semua obrolan, dan semua
+                waktu yang kamu kasih untuk aku.
             </p>
 
 
             <p>
-                Aku tahu aku nggak selalu sempurna.
-                Tapi aku mau terus belajar memahami kamu,
-                menjaga kamu, dan mencintai kamu
-                dengan cara yang lebih baik.
+                Aku tahu aku masih jauh dari sempurna.
+                Tapi satu hal yang pasti,
+                aku selalu ingin belajar menjadi
+                seseorang yang lebih baik untuk kamu.
             </p>
 
 
             <p>
-                Aku nggak tahu akan seperti apa
-                tahun-tahun berikutnya.
-                Tapi kalau aku boleh memilih,
-                aku ingin melewatinya bersama kamu.
-            </p>
-
-
-            <p>
-                Semoga nanti kita bisa melihat kembali
-                hari ini dan tersenyum karena ternyata
-                kita sudah sejauh ini.
+                Kalau nanti kita melihat kembali
+                hari ini beberapa tahun dari sekarang,
+                aku harap kita bisa tersenyum
+                dan berkata,
+                "Ternyata kita benar-benar berhasil
+                melewati semuanya bersama."
             </p>
 
 
             <p>
                 Happy first anniversary, sayang.
-                Thank you for choosing me.
+                Terima kasih sudah memilih aku.
             </p>
 
 
             <p class="signature">
                 I love you.<br>
-                Always. ♡
+                Always ♡
             </p>
 
         </div>
 
 
         <button
-            class="next-btn"
-            data-next="finalScreen"
+            class="continue-button"
+            onclick="goTo('finalScreen')"
         >
             ONE LAST THING...
         </button>
@@ -1166,16 +1083,16 @@ h2 {
 
 
 
-<!-- =====================================================
+<!-- ==================================================
      6. FINAL
-===================================================== -->
+================================================== -->
 
 <section
     id="finalScreen"
     class="screen"
 >
 
-    <div class="content">
+    <div class="inner">
 
         <div class="eyebrow">
             ONE LAST QUESTION
@@ -1192,8 +1109,8 @@ h2 {
         <div class="final-buttons">
 
             <button
-                id="yesButton"
-                class="next-btn"
+                class="continue-button"
+                onclick="sayYes()"
                 type="button"
             >
                 YES, ALWAYS ♡
@@ -1201,8 +1118,9 @@ h2 {
 
 
             <button
+                class="no-button"
                 id="noButton"
-                class="no-btn"
+                onclick="runAway()"
                 type="button"
             >
                 NO
@@ -1216,37 +1134,39 @@ h2 {
 
 
 
-<!-- =====================================================
+<!-- ==================================================
      7. ANNIVERSARY
-===================================================== -->
+================================================== -->
 
 <section
-    id="anniversary"
+    id="anniversaryScreen"
     class="screen"
 >
 
-    <div class="content">
+    <div class="inner">
 
         <div class="eyebrow">
-            OUR NEXT CHAPTER
+            18 SEPTEMBER 2026
         </div>
 
 
         <h2 class="anniversary-title">
-            Another year,<br>
-            <em>with you.</em>
+            Happy<br>
+            <em>Anniversary.</em>
         </h2>
 
 
-        <div class="big-heart">
+        <div class="heart-big">
             ♡
         </div>
 
 
-        <p class="description">
-            Happy Anniversary, my love.
-            <br>
-            Thank you for being my favorite person. 💗
+        <p class="text">
+            One year down.<br>
+            So many more memories to go.
+            <br><br>
+            I choose you. Today,
+            tomorrow, and every day after. 💗
         </p>
 
     </div>
@@ -1257,37 +1177,130 @@ h2 {
 </div>
 
 
-
 <script>
 
-/* =====================================================
-   CONFIGURATION
-===================================================== */
+/* ==================================================
+   TANGGAL JADIAN
+================================================== */
+
+const START_DATE =
+    new Date(2025, 8, 18);
 
 
 /*
-    GANTI TANGGAL JADIAN DI SINI.
-
-    Contoh:
-    3 September 2025
-
-    September = 8
-
-    Jadi:
-
-    new Date(2025, 8, 3)
+    2025
+    8 = September
+    18 = tanggal
 */
 
-const START_DATE =
-    new Date(2025, 8, 3);
+
+/* ==================================================
+   OPEN GIFT
+================================================== */
+
+function openGift() {
+
+    const gift =
+        document.getElementById(
+            "giftButton"
+        );
+
+    gift.classList.add("open");
 
 
-/* =====================================================
-   GET ELEMENTS
-===================================================== */
+    createHearts(25);
 
-const gift =
-    document.getElementById("gift");
 
-const giftScreen =
-    document.getElementById("g
+    setTimeout(
+        function() {
+
+            goTo("welcomeScreen");
+
+        },
+        850
+    );
+}
+
+
+/* ==================================================
+   PINDAH SCREEN
+================================================== */
+
+function goTo(screenID) {
+
+    const screens =
+        document.querySelectorAll(
+            ".screen"
+        );
+
+
+    screens.forEach(
+        function(screen) {
+
+            screen.classList.remove(
+                "active"
+            );
+
+        }
+    );
+
+
+    const target =
+        document.getElementById(
+            screenID
+        );
+
+
+    if (target) {
+
+        target.classList.add(
+            "active"
+        );
+
+    }
+
+
+    window.scrollTo(
+        0,
+        0
+    );
+}
+
+
+/* ==================================================
+   COUNTER
+================================================== */
+
+function updateCounter() {
+
+    const now =
+        new Date();
+
+
+    const difference =
+        now.getTime() -
+        START_DATE.getTime();
+
+
+    if (difference < 0) {
+        return;
+    }
+
+
+    const totalMinutes =
+        Math.floor(
+            difference /
+            60000
+        );
+
+
+    const days =
+        Math.floor(
+            totalMinutes /
+            1440
+        );
+
+
+    const hours =
+        Math.floor(
+            (to
