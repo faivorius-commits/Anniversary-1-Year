@@ -1,370 +1,256 @@
-/* =====================================================
-   ANNIVERSARY WEBSITE
-   SCRIPT.JS
-===================================================== */
+/* =========================
+   SETTINGS
+========================= */
+
+const START_DATE = new Date(2025, 8, 18);
+// 2025, 8, 18 = 18 September 2025
+// Ingat: bulan JavaScript dimulai dari 0.
 
 
-/* =====================================================
-   ELEMENTS
-===================================================== */
+/* =========================
+   OPEN GIFT
+========================= */
 
-const gift = document.getElementById("gift");
-const openingScreen = document.getElementById("opening-screen");
-const mainContent = document.getElementById("main-content");
+let giftOpened = false;
 
+function openGift() {
 
-/* =====================================================
-   OPENING STATE
-===================================================== */
+    if (giftOpened) return;
 
-let opened = false;
+    giftOpened = true;
 
+    const giftScreen = document.getElementById("giftScreen");
+    const giftButton = document.getElementById("giftButton");
+    const mainContent = document.getElementById("mainContent");
+    const welcomeScreen = document.getElementById("welcomeScreen");
 
-/* =====================================================
-   GIFT CLICK
-===================================================== */
+    // Animasi gift
+    if (giftButton) {
+        giftButton.style.transform = "scale(1.15)";
+    }
 
-if (gift) {
+    // Ledakan hati
+    createHearts(25);
 
-    gift.addEventListener("click", function () {
+    setTimeout(function () {
 
-        if (opened) return;
+        if (giftScreen) {
+            giftScreen.style.display = "none";
+        }
 
-        opened = true;
+        if (mainContent) {
+            mainContent.classList.add("show");
+        }
 
+        if (welcomeScreen) {
+            welcomeScreen.classList.add("active");
+        }
 
-        /* ---------------------------------------------
-           ADD OPEN CLASS
-        --------------------------------------------- */
+        document.body.style.overflowY = "auto";
 
-        gift.classList.add("open");
-
-
-        /* ---------------------------------------------
-           CREATE HEARTS
-        --------------------------------------------- */
-
-        createHearts();
-
-
-        /* ---------------------------------------------
-           MOVE TO MAIN CONTENT
-        --------------------------------------------- */
-
-        setTimeout(function () {
-
-            if (openingScreen) {
-
-                openingScreen.classList.add("hide");
-
-            }
+    }, 500);
+}
 
 
-            if (mainContent) {
+/* =========================
+   CHANGE SECTION
+========================= */
 
-                mainContent.classList.add("show");
+function nextSection(sectionId) {
 
-            }
+    const currentSections = document.querySelectorAll(
+        "#mainContent .content-screen, #mainContent .anniversary-screen"
+    );
 
-
-            document.body.style.overflow = "auto";
-
-
-        }, 1200);
-
+    currentSections.forEach(function(section) {
+        section.classList.remove("active");
     });
 
+    const next = document.getElementById(sectionId);
+
+    if (next) {
+        next.classList.add("active");
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+    }
 }
 
 
-/* =====================================================
-   HEARTS
-===================================================== */
+/* =========================
+   COUNTER
+========================= */
 
-function createHearts() {
+function updateCounter() {
 
-    const hearts = [
+    const now = new Date();
+
+    let difference = now - START_DATE;
+
+    if (difference < 0) {
+        difference = 0;
+    }
+
+    const totalSeconds = Math.floor(difference / 1000);
+
+    const days = Math.floor(totalSeconds / 86400);
+
+    const hours = Math.floor(
+        (totalSeconds % 86400) / 3600
+    );
+
+    const minutes = Math.floor(
+        (totalSeconds % 3600) / 60
+    );
+
+    const seconds = totalSeconds % 60;
+
+
+    const daysElement = document.getElementById("days");
+    const hoursElement = document.getElementById("hours");
+    const minutesElement = document.getElementById("minutes");
+    const secondsElement = document.getElementById("seconds");
+
+
+    if (daysElement) {
+        daysElement.textContent = days.toLocaleString("id-ID");
+    }
+
+    if (hoursElement) {
+        hoursElement.textContent = String(hours).padStart(2, "0");
+    }
+
+    if (minutesElement) {
+        minutesElement.textContent = String(minutes).padStart(2, "0");
+    }
+
+    if (secondsElement) {
+        secondsElement.textContent = String(seconds).padStart(2, "0");
+    }
+}
+
+
+/* =========================
+   YES BUTTON
+========================= */
+
+function sayYes() {
+
+    createHearts(60);
+
+    nextSection("anniversaryScreen");
+
+    // Confetti sederhana
+    createConfetti();
+}
+
+
+/* =========================
+   FLOATING HEARTS
+========================= */
+
+function createHearts(amount = 20) {
+
+    const container = document.getElementById("hearts-container");
+
+    if (!container) return;
+
+    const hearts = ["♡", "♥", "💕", "💗", "💖"];
+
+    for (let i = 0; i < amount; i++) {
+
+        const heart = document.createElement("span");
+
+        heart.className = "heart";
+
+        heart.textContent =
+            hearts[Math.floor(Math.random() * hearts.length)];
+
+        heart.style.left =
+            Math.random() * 100 + "%";
+
+        heart.style.fontSize =
+            (14 + Math.random() * 22) + "px";
+
+        heart.style.animationDuration =
+            (4 + Math.random() * 5) + "s";
+
+        heart.style.animationDelay =
+            Math.random() * 1.5 + "s";
+
+        container.appendChild(heart);
+
+        setTimeout(function() {
+            heart.remove();
+        }, 10000);
+    }
+}
+
+
+/* =========================
+   CONFETTI
+========================= */
+
+function createConfetti() {
+
+    const container = document.getElementById("hearts-container");
+
+    if (!container) return;
+
+    const symbols = [
+        "✨",
+        "💗",
+        "💕",
+        "🎀",
         "♡",
-        "♥",
-        "♡",
-        "♥",
-        "♡"
+        "⭐"
     ];
 
+    for (let i = 0; i < 70; i++) {
 
-    for (let i = 0; i < 30; i++) {
+        const item = document.createElement("span");
 
-        setTimeout(function () {
+        item.className = "heart";
 
-            const heart =
-                document.createElement("span");
+        item.textContent =
+            symbols[Math.floor(Math.random() * symbols.length)];
 
+        item.style.left =
+            Math.random() * 100 + "%";
 
-            heart.className =
-                "floating-heart";
+        item.style.bottom =
+            (20 + Math.random() * 50) + "%";
 
+        item.style.fontSize =
+            (14 + Math.random() * 20) + "px";
 
-            heart.innerHTML =
-                hearts[
-                    Math.floor(
-                        Math.random() *
-                        hearts.length
-                    )
-                ];
+        item.style.animationDuration =
+            (3 + Math.random() * 4) + "s";
 
+        container.appendChild(item);
 
-            /* -----------------------------------------
-               POSITION
-            ----------------------------------------- */
-
-            heart.style.left =
-                (
-                    35 +
-                    Math.random() * 30
-                ) + "vw";
-
-
-            heart.style.top =
-                (
-                    45 +
-                    Math.random() * 10
-                ) + "vh";
-
-
-            /* -----------------------------------------
-               SIZE
-            ----------------------------------------- */
-
-            heart.style.fontSize =
-                (
-                    12 +
-                    Math.random() * 22
-                ) + "px";
-
-
-            /* -----------------------------------------
-               RANDOM MOVEMENT
-            ----------------------------------------- */
-
-            heart.style.setProperty(
-                "--random-x",
-                Math.random()
-            );
-
-
-            heart.style.animationDuration =
-                (
-                    1.5 +
-                    Math.random() * 2
-                ) + "s";
-
-
-            document.body.appendChild(
-                heart
-            );
-
-
-            /* -----------------------------------------
-               REMOVE
-            ----------------------------------------- */
-
-            setTimeout(function () {
-
-                heart.remove();
-
-            }, 4000);
-
-
-        }, i * 50);
-
+        setTimeout(function() {
+            item.remove();
+        }, 8000);
     }
-
 }
 
 
-/* =====================================================
-   SCROLL REVEAL
-===================================================== */
+/* =========================
+   START
+========================= */
 
-const revealElements =
-    document.querySelectorAll(
-        ".memory, .photo, .letter-paper, .intro"
-    );
+document.addEventListener("DOMContentLoaded", function() {
 
+    // Lock screen ketika gift belum dibuka
+    document.body.style.overflowY = "hidden";
 
-/* =====================================================
-   INTERSECTION OBSERVER
-===================================================== */
+    // Counter langsung berjalan
+    updateCounter();
 
-if (
-    "IntersectionObserver"
-    in window
-) {
+    // Update setiap detik
+    setInterval(updateCounter, 1000);
 
-    const observer =
-        new IntersectionObserver(
-
-            function (entries) {
-
-                entries.forEach(
-                    function (entry) {
-
-                        if (
-                            entry.isIntersecting
-                        ) {
-
-                            entry.target.classList.add(
-                                "visible"
-                            );
-
-                        }
-
-                    }
-                );
-
-            },
-
-            {
-                threshold: 0.12
-            }
-
-        );
-
-
-    revealElements.forEach(
-        function (element) {
-
-            observer.observe(
-                element
-            );
-
-        }
-    );
-
-}
-
-
-/* =====================================================
-   FLOATING HEART CSS
-===================================================== */
-
-const heartStyle =
-    document.createElement("style");
-
-
-heartStyle.innerHTML = `
-
-.floating-heart {
-
-    position: fixed;
-
-    z-index: 99999;
-
-    pointer-events: none;
-
-    color: #d985a8;
-
-    font-family:
-        Georgia,
-        serif;
-
-    animation:
-        heartExplosion
-        2s
-        ease-out
-        forwards;
-}
-
-
-.memory.visible,
-.photo.visible,
-.letter-paper.visible,
-.intro.visible {
-
-    opacity: 1 !important;
-
-    transform:
-        translateY(0) !important;
-}
-
-
-@keyframes heartExplosion {
-
-    0% {
-
-        opacity: 1;
-
-        transform:
-            translate(
-                0,
-                0
-            )
-            scale(.4)
-            rotate(0deg);
-
-    }
-
-
-    40% {
-
-        opacity: 1;
-
-    }
-
-
-    100% {
-
-        opacity: 0;
-
-        transform:
-            translate(
-                calc(
-                    -150px +
-                    300px *
-                    var(--random-x)
-                ),
-                -280px
-            )
-            scale(1.4)
-            rotate(30deg);
-
-    }
-
-}
-
-`;
-
-
-document.head.appendChild(
-    heartStyle
-);
-
-
-/* =====================================================
-   INITIAL STATE
-===================================================== */
-
-if (openingScreen) {
-
-    openingScreen.classList.remove(
-        "hide"
-    );
-
-}
-
-
-if (mainContent) {
-
-    mainContent.classList.remove(
-        "show"
-    );
-
-}
-
-
-/* =====================================================
-   LOCK SCROLL
-===================================================== */
-
-document.body.style.overflow =
-    "hidden";
+});
